@@ -1,0 +1,19 @@
+# Qt files
+
+! parenhesisParser.pro
+parenhesisParser.pro.user
+parenhesisParser.pro.user.*
+build-parenhesisParser-Desktop-Debug/
+
+!log.txt
+
+# TeX files
+*.aux
+*.gz
+*.synctex.*
+*.log
+*.lof
+*.lot
+*.txt
+*.out
+*.toc
