@@ -1,0 +1,4 @@
+Recursion depth: 7
+Processed: (A(B(AB)))
+RESULT:
+Brackets
