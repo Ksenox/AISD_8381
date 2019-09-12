@@ -1,0 +1,4 @@
+Text_with_brackets_syntax_checker called Args= {A}{A}{A}
+Text_with_brackets_syntax_checker called Args= A}{A}{A}
+Text_with_brackets_syntax_checker called Args= A}{A}
+Text_with_brackets_syntax_checker called Args= A}
