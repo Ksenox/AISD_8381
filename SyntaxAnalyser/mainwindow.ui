@@ -6,9 +6,14 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>517</width>
-    <height>442</height>
+    <width>501</width>
+    <height>366</height>
    </rect>
+  </property>
+  <property name="font">
+   <font>
+    <pointsize>10</pointsize>
+   </font>
   </property>
   <property name="windowTitle">
    <string>Синтаксический анализатор</string>
@@ -17,143 +22,26 @@
    <bool>false</bool>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <widget class="QPushButton" name="A_button">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>40</y>
-      <width>80</width>
-      <height>25</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>A</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="B_button">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>70</y>
-      <width>80</width>
-      <height>25</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>B</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="Square_left_button">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>100</y>
-      <width>80</width>
-      <height>25</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>[</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="Square_right_button">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>130</y>
-      <width>80</width>
-      <height>25</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>]</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="Circle_left_button">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>160</y>
-      <width>80</width>
-      <height>25</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>(</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="Circle_right_button">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>190</y>
-      <width>80</width>
-      <height>25</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>)</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="Waving_left_button">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>220</y>
-      <width>80</width>
-      <height>25</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>{</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="Waving_right_button">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>250</y>
-      <width>80</width>
-      <height>25</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>}</string>
-    </property>
-   </widget>
-   <widget class="QTextBrowser" name="Input_text_field">
-    <property name="geometry">
-     <rect>
-      <x>120</x>
-      <y>40</y>
-      <width>311</width>
-      <height>71</height>
-     </rect>
-    </property>
-    <property name="readOnly">
-     <bool>false</bool>
-    </property>
-   </widget>
    <widget class="QLabel" name="label">
     <property name="enabled">
      <bool>false</bool>
     </property>
     <property name="geometry">
      <rect>
-      <x>160</x>
+      <x>50</x>
       <y>20</y>
-      <width>291</width>
+      <width>311</width>
       <height>20</height>
      </rect>
     </property>
     <property name="text">
-     <string>Enter your text here or by clicking buttons</string>
+     <string>Enter your text here or load it from file</string>
     </property>
    </widget>
    <widget class="QPushButton" name="Check_syntax_button">
     <property name="geometry">
      <rect>
-      <x>120</x>
+      <x>50</x>
       <y>130</y>
       <width>311</width>
       <height>41</height>
@@ -166,11 +54,17 @@
    <widget class="QTextBrowser" name="Answer_text_field">
     <property name="geometry">
      <rect>
-      <x>120</x>
-      <y>220</y>
+      <x>50</x>
+      <y>200</y>
       <width>311</width>
-      <height>51</height>
+      <height>61</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Times New Roman</family>
+      <pointsize>11</pointsize>
+     </font>
     </property>
     <property name="readOnly">
      <bool>true</bool>
@@ -182,8 +76,8 @@
     </property>
     <property name="geometry">
      <rect>
-      <x>120</x>
-      <y>190</y>
+      <x>50</x>
+      <y>170</y>
       <width>221</width>
       <height>31</height>
      </rect>
@@ -195,38 +89,62 @@
    <widget class="QPushButton" name="Load_from_file_button">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>280</y>
-      <width>80</width>
-      <height>25</height>
+      <x>370</x>
+      <y>40</y>
+      <width>121</width>
+      <height>31</height>
      </rect>
     </property>
     <property name="text">
-     <string>Load..</string>
+     <string>Load from...</string>
     </property>
    </widget>
-   <zorder>Square_right_button</zorder>
-   <zorder>A_button</zorder>
-   <zorder>B_button</zorder>
-   <zorder>Square_left_button</zorder>
-   <zorder>Circle_left_button</zorder>
-   <zorder>Circle_right_button</zorder>
-   <zorder>Waving_left_button</zorder>
-   <zorder>Waving_right_button</zorder>
-   <zorder>Input_text_field</zorder>
-   <zorder>label</zorder>
-   <zorder>Check_syntax_button</zorder>
-   <zorder>Answer_text_field</zorder>
-   <zorder>Answer_label</zorder>
-   <zorder>Load_from_file_button</zorder>
+   <widget class="QLineEdit" name="Input_text_field">
+    <property name="geometry">
+     <rect>
+      <x>50</x>
+      <y>40</y>
+      <width>311</width>
+      <height>71</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Times New Roman</family>
+      <pointsize>20</pointsize>
+     </font>
+    </property>
+    <property name="maxLength">
+     <number>100</number>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="File_output_flag">
+    <property name="geometry">
+     <rect>
+      <x>370</x>
+      <y>90</y>
+      <width>121</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Write to file</string>
+    </property>
+    <property name="checkable">
+     <bool>true</bool>
+    </property>
+    <property name="checked">
+     <bool>false</bool>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>517</width>
-     <height>25</height>
+     <width>501</width>
+     <height>28</height>
     </rect>
    </property>
   </widget>

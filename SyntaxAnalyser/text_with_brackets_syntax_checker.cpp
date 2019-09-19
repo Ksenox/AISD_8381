@@ -2,35 +2,46 @@
 
 Text_with_brackets_syntax_checker::Text_with_brackets_syntax_checker()
 {
-    QFile log("D:\\ProgrammFiles\\QtProjects\\untitled1\\Logs.txt");
-    log.open(QIODevice::WriteOnly);
-    log.write("");
-    log.close();
+    //clears the info inside the log file
+    logs_file = new QFile("D:\\ProgrammFiles\\QtProjects\\untitled1\\Logs.txt");
+    logs_file->open(QIODevice::WriteOnly);
+    logs_file->close();
+
+    recursion_depth = 0;
 }
 
-bool Text_with_brackets_syntax_checker::check_text_with_brackets_syntax(const char* text,
-                                                                        unsigned int text_size,
-                                                                        unsigned int left_border_position,
-                                                                        int counter)
+void Text_with_brackets_syntax_checker::write_to_logs_file(char *current_text, unsigned int text_size)
 {
-    QFile log("D:\\ProgrammFiles\\QtProjects\\untitled1\\Logs.txt");
-    log.open(QIODevice::Append);
-    log.write("Text_with_brackets_syntax_checker called ");
-    log.write("Args= ");
-    log.write(text);
-    log.write("\n");
-    log.close();
+    logs_file->open(QIODevice::Append);
+
+    QString current_log = "Recursion depth = " + QString(std::to_string(recursion_depth).c_str()) +
+                          " Arguments = "      + QString(current_text).left(text_size) + "\n";
+    QTextStream logs_output(logs_file);
+
+    logs_output << current_log;
+
+    logs_file->close();
+}
+
+
+bool Text_with_brackets_syntax_checker::check_text_with_brackets_syntax(char* text,
+                                                                        unsigned int text_size,
+                                                                        unsigned int left_border_position)
+{
+    write_to_logs_file(text, text_size);
+
+    recursion_depth += 1;
 
     for(unsigned int i = 0; i < text_size; i++)
     {
         if(is_element_a_left_bracket(text[i]) == true )
         {
-            unsigned int right_bracket_position = find_right_bracket_pair(text + i, text_size - i);
+            unsigned int right_bracket_position = find_right_bracket_pair(text + i, text_size - i, left_border_position);
 
-            if(right_bracket_position == 0) throw Syntax_mistake(left_border_position + 1, REDUNANT_BRACKET);
+            if(right_bracket_position == 0) throw Syntax_mistake(left_border_position, REDUNANT_BRACKET);
             if(right_bracket_position == 1) throw Syntax_mistake(left_border_position + 1, NO_SYMBOL);
 
-            check_text_with_brackets_syntax(text + i + 1, right_bracket_position - 1, left_border_position + 1, counter + 1);
+            check_text_with_brackets_syntax(text + i + 1, right_bracket_position - 1, left_border_position + 1);
 
             i = left_border_position + right_bracket_position;
 
@@ -38,10 +49,12 @@ bool Text_with_brackets_syntax_checker::check_text_with_brackets_syntax(const ch
         }
         else
         {
-             check_element_syntax(*(text + i), left_border_position);
+             check_element_syntax(text[i], left_border_position);
              left_border_position += 1;
         }
     }
+
+    recursion_depth -= 1;
 
     return true;
 }
@@ -86,7 +99,7 @@ bool Text_with_brackets_syntax_checker::comparing_brackets_types(char left_brack
     return false;
 }
 
-unsigned int Text_with_brackets_syntax_checker::find_right_bracket_pair(const char* left_bracket_element, unsigned int text_size)
+unsigned int Text_with_brackets_syntax_checker::find_right_bracket_pair(char* left_bracket_element, unsigned int text_size, unsigned int left_border_position)
 {
     Stack stack;
     stack.add_to_stack(left_bracket_element[0]);
@@ -108,7 +121,7 @@ unsigned int Text_with_brackets_syntax_checker::find_right_bracket_pair(const ch
             }
             else
             {
-                return 0;
+                throw Syntax_mistake(left_border_position + i, REDUNANT_BRACKET);
             }
         }
 
