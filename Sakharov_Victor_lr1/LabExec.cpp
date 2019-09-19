@@ -1,5 +1,6 @@
 #include "LabExec.h"
 
+// Удаление пробелов в начале строки
 void SkipSpaces (std::string& str, int& pos) {
     while (str.length() > 0 && str[0] == ' ') {
         str = str.substr(1);
@@ -7,8 +8,10 @@ void SkipSpaces (std::string& str, int& pos) {
     }
 }
 
+// Удалить n символов из начала строки
 void Skip (std::string& str, int& pos, const int indent, int n) {
     if (str.length() >= n) {
+        // Вывод удаляемых символов
         ProceedOutput(str.substr(0, n), indent);
         str = str.substr(n);
         pos++;
@@ -16,9 +19,10 @@ void Skip (std::string& str, int& pos, const int indent, int n) {
     }
 }
 
-//Проверка, что str начинается с aim и дальше находится не_буква
+// Проверка, что str начинается со слова aim и дальше находится не_буква
 bool FindWord (std::string& str, int& pos, const int indent, const char* aim) {
     int len = strlen(aim);
+    // Сравнение начала строки с aim
     if (!str.compare(0, len, aim) && (len == str.length() || (len < str.length() && (!isalnum(str[len]) || !isalnum(aim[0]))))) {
         Skip(str, pos, indent, len);
         return true;
@@ -26,6 +30,7 @@ bool FindWord (std::string& str, int& pos, const int indent, const char* aim) {
     return false;
 }
 
+// Функция для инициализации проверки выражения и запуска рекурсии
 bool CheckStatement (std::string& str) {
     std::string copy = string(str);
     int position = 0;
@@ -35,6 +40,7 @@ bool CheckStatement (std::string& str) {
         }
         else ProceedError("End of string expected. \"" + copy + "\" left", position);
     }
+    // Вывод ошибки
     cout << "> " << str << endl << "> ";
     for (int i = 0; i < str.length() - copy.length(); ++i) {
         cout << " ";
@@ -56,25 +62,19 @@ bool Statement (std::string& str, int& pos, const int indent) {
     }
     else if (FindWord(str, pos, indent, NOT_S)) {
         if (FindWord(str, pos, indent, OPEN_BRACKET)) {
-            if (Operand(str, pos, indent + 1)) {
-                if (FindWord(str, pos, indent, CLOSE_BRACKET)) {
-                    return true;
-                }
-                else ProceedError("')' expected", pos);
+            if (Operand(str, pos, indent + 1) && FindWord(str, pos, indent, CLOSE_BRACKET)) {
+                return true;
             }
-            else ProceedError("Operand expected", pos);
+            else ProceedError("')' expected", pos);
         }
         else ProceedError("'(' expected", pos);
     }
     else if (Operation(str, pos, indent + 1)) {
         if (FindWord(str, pos, indent, OPEN_BRACKET)) {
-            if (OperandList(str, pos, indent + 1)) {
-                if (FindWord(str, pos, indent, CLOSE_BRACKET)) {
-                    return true;
-                }
-                else ProceedError("')' expected", pos);
+            if (OperandList(str, pos, indent + 1) && FindWord(str, pos, indent, CLOSE_BRACKET)) {
+                return true;
             }
-            else ProceedError("List of operands expected", pos);
+            else ProceedError("')' expected", pos);
         }
         else ProceedError("'(' expected", pos);
     }
@@ -84,6 +84,7 @@ bool Statement (std::string& str, int& pos, const int indent) {
 
 // Letter
 bool Name (std::string& str, int& pos, const int indent) {
+    // Проверка, является ли первый символ строки буквой
     if ((str.length() == 1 && isalpha(str[0])) || (str.length() > 1 && isalpha(str[0]) && !isalnum(str[1]))) {
         Skip(str, pos, indent);
         return true;

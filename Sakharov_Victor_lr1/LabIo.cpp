@@ -1,5 +1,6 @@
 #include "LabIo.h"
 
+// Функция ввода данных
 string ProceedInput (int argc, char** argv) {
     cout << "> Lab work #1" << endl;
     if (argc > 1) {
@@ -53,6 +54,7 @@ string ReadFromConsole () {
 }
 
 string ReadRandomFromExamples () {
+    // Генерация рандомного числа от 0 до 9
     std::mt19937 mt(time(nullptr));
     std::uniform_int_distribution<int> dist(0, 9);
     std::string res = string(Examples[dist(mt)]);
