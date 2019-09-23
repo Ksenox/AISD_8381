@@ -1,8 +1,136 @@
-#include<iostream>
-#include <string>
-#define ERROR "Error\n"
+#include <iostream>
+#include <cstdlib>
+#include <fstream>
+
 using namespace std;
- 
+ofstream out("./out.txt");
+
+struct ELEM
+{
+    ELEM *next;
+    bool event;
+    union {
+        ELEM *down; //true
+        char simb;  //false
+    };
+
+};
+
+int what(char& simb)
+{
+    if((simb>='a'&&simb<='z')||(simb>='0'&&simb<='9'))
+        return 3;
+    else if(simb=='*'||simb=='-'||simb=='+'||simb=='/')
+        return 2;
+    else if(simb=='('||simb==')')
+        return 1;
+    else if(simb=='\n')
+    {
+        simb=0;
+        return -1;
+    }
+    else if(simb>=32)
+        return -2;
+    return 0;
+}
+
+void push(ELEM *&head, char simb)
+{
+    ELEM *element = new ELEM;
+    if (simb == '(')
+    {
+    	head->next=NULL;
+        head->down = element;
+        head->event = true;
+    }
+    else if (simb != ')')
+    {
+        head->next = element;
+        head->simb = simb;
+        head->event = false;
+    }
+    else if (simb == ')')
+	    {
+	    	head->next=element;
+	    	element->simb=')';
+	    	element->next=NULL;
+	    	element->event=false;
+	    }
+}
+
+void input(ELEM *&head, string initial, int& position)
+{
+    if (position+1 == initial.size())
+        return;
+    position++;
+    push(head,initial[position]);
+    if (initial[position] == '(')
+    	input(head->down,initial,position);
+    else if(initial[position+1]!=')')
+    	input(head->next,initial,position);
+    if(initial[position+1]==')')
+    { 
+    	if(head->event)
+    	{
+    		position+=1;
+    		push(head,initial[position]);
+    		input(head->next, initial, position);
+    	}
+    return;
+    }
+}
+
+void test(ELEM *&head, int len, int& position,string& help,string& finish,int& error)
+{
+    if (position >= len)
+        return;
+    position++;
+    if(finish.find('(')!=string::npos)
+    {
+        error+=1;
+        return;
+    }
+    if(!(head->event))
+        if(what(head->simb)==-2)
+        {
+            error+=1;
+            out<<error<<". simbol:  \'"<<head->simb<<"\' (index of simbol: "<<position<<")\n";
+        }
+    if(!(head->event)&&head->simb<=32)
+        return;
+    if (head->event)
+    {
+        position++;
+        if(what(head->down->simb)==2)
+        {
+            error+=1;
+            out<<error<<". simbol:  \'"<<head->down->simb<<"\' (index of simbol: "<<position<<")\n";
+        }
+        test(head->down,len,position,help,finish,error);
+    }
+    if(head->next)
+    {
+        if(!(head->next->event))
+        {
+            if(what(head->simb)==what(head->next->simb))
+            {
+    
+                error+=1;
+                out<<error<<". simbol:  \'"<<head->next->simb<<"\' (index of simbol: "<<position<<")\n";
+            }
+            if(head->simb=='/'&&head->next->simb=='0')
+            {
+
+                error+=1;
+                out<<error<<". simbols:\""<<head->simb<<head->next->simb<<"\" (index of simbol: "<<position<<")\n";
+            }
+        }
+        test(head->next,len,position,help,finish,error);
+    }
+    if(finish.find(')')!=string::npos)
+        error+=1;
+}
+
 int prior(char x)
 {
     if ((x=='*')||(x=='/')) return 2;
@@ -10,153 +138,107 @@ int prior(char x)
     if ((x=='(')||(x==')')) return 0;
     return -1;
 }
- 
-class stack
+
+void postf(string& help,string& finish,char simb,int position)
 {
-public :
-    int top;
-    string body;
-    stack(){top=0;}
-    bool empty(){return top==0;}
-    char get_top_element(){return body[top];}
-    int top_prior(){return prior(body[top]);}
-    void push(char x)
+    out<<"\n"<<position+1<<'.'<<simb<<"\t"<<help[help.size()-1]<<"\t";
+	if(simb=='(')
+	{
+		help+=simb;
+	}
+	else if((simb=='+')||(simb=='-')||(simb=='/')||(simb=='*'))
+	{
+		while((help.size()!=0)&&(prior(help[help.size()-1])>prior(simb)))
+		{
+			finish+=help[help.size()-1];
+			help.resize(help.size()-1);
+            out<<finish[finish.size()-1];
+		}
+		help+=simb;
+	}
+	else if(simb==')')
+	{
+		while(help.size()&&help[help.size()-1]!='(')
+		{
+			finish+=help[help.size()-1];
+			help.resize(help.size()-1);
+            out<<finish[finish.size()-1];
+		}
+        help.resize(help.size()-1);
+	}
+	else
+	{
+		finish+=simb;
+        out<<simb;
+	}
+}
+
+void fun(ELEM *&head, int& len, int& position,string& help,string& finish)
+{
+	if (position+1 == len)
+        return;
+    position++;
+    if(!(head->event))
     {
-        top++;
-        body[top]=x;
+    	postf(help,finish,head->simb,position);
     }
-    char pop()
+    if(!(head->event)&&head->simb<=' ')
     {
-        top--;
-        return body[top+1];
+        postf(help,finish,')',position);
+        len++;
+        return;
     }
-    
-};
-
-int what(char simv)
-{
-	if(simv>='a'&&simv<='z')
-		return 3;
-	if(simv=='*'||simv=='-'||simv=='+'||simv=='/')
-		return 2;
-	if(simv=='('||simv==')')
-		return 1;
-	return 0;
-}
- 
-
-void postf(string note,string &pnote,int &p, int &i,stack &s)
-{
- 
-    
-    	cout<<"\n1."<<note[i]<<"\t"<<s.get_top_element()<<"\t";
-
-        if (note[i]=='(') s.push(note[i]);
-        else if ((note[i]=='+')||(note[i]=='-')||(note[i]=='/')||(note[i]=='*'))
-        {
-    	//cout<<note[i]<<pnote[p]<<endl;
-
-            while((!s.empty())&&(s.top_prior()>prior(note[i])))
-            {
-                p++;
-                pnote[p]=s.pop();
-                cout<<pnote[p];
-
-            }
-            s.push(note[i]);
-        }
-        else if(note[i]==')')
-        {
-    	//cout<<note[i]<<pnote[p]<<endl;
-
-            while((!s.empty())&&(s.get_top_element()!='('))
-            {
-                p++;
-                pnote[p]=s.pop();
-                cout<<pnote[p];
-            }
-            s.pop();
-        }
-        else
-        {
-    	//cout<<note[i]<<pnote[p]<<endl;
-
-            p++;
-            pnote[p]=note[i];
-            cout<<pnote[p];
-        }
-        if(i>=note.size())
-        	return;
-    i++;
- 	postf(note,pnote,p,i,s);
-
- 	if(i>=note.size())
-    	while(!s.empty())
-    	{
-    	    p++;
-    	    pnote[p]=s.pop();
-    	}
-
-    return;
-}
- 
- void test(string n,string p)
-{
-	int error=0;
- 	for(int i=0;i<n.size()-1;i++)
- 	{
- 		if(what(n[i])==0) 
- 			error+=1;
- 		if(n[i]=='('&&n[i+1]==')') 
- 			error+=1;
- 		if(what(n[i])==what(n[i+1])&&what(n[i])!=1) 
- 			error+=1;
- 		if(n[i]=='/'&&n[i+1]=='0') 
- 			error+=1;
- 	}
- 	if(p.find('(')!=-1||p.find(')')!=-1)
- 			error+=1;
-
- 	if(error)
- 	{
- 		cout<<ERROR;
- 		exit(1);
- 	}
- }
- 
-
-void input(string& note)
-{
-
-	cin>>note;
-
-}
-
-void output(string pnote,int p)
-{
-	cout<<"Ошибок не обнаружено.\nПостфиксная запись: ";
-	for(int i=1;i<=p;i++)
-        cout<<pnote[i];
-    cout<<endl;
-
-}
-
-
-int main(int argc, char* argv[])
-{
-    stack s;
-    string note,pnote;
-    int i=0,p=0;
-    cout<<"Входны данные: ";
-    if(argc<2) input(note);
-    else 
+    if (head->event)
     {
-    	note=argv[1];
-    	cout<<note<<endl;
+    	postf(help,finish,'(',position);
+    	fun(head->down,len,position,help,finish);
+        position++;
     }
- 	postf(note,pnote,p,i,s);
- 	test(note,pnote);
- 	output(pnote,p);
-    
+    if(head->next)
+    {
+    	fun(head->next,len,position,help,finish);
+    }
+}
+
+
+
+int main()
+{
+    string initial;
+    string finish,help;
+    int error=0;
+    ELEM *head = new ELEM;
+
+    //in
+    cout<<"Введите выражение: ";
+    cin>>initial;
+    out<<"Введенное выражение: "<<initial<<"\n\n";
+    int len=initial.size();
+    int position = -1;
+    input(head, initial, position);
+
+    //test
+    out<<"Найденные ошибки:\n";
+    position=-1;
+    test(head,len,position,help,finish,error);
+    if(error)
+    {
+        out<<"-Найдено ошибок:"<<error<<endl;
+        return 0;
+    }
+    else
+    {
+        out<<"-Ошибки отсутствуют\n";
+    }
+
+    //postf
+    position=-1;
+    fun(head,len,position,help,finish);
+
+    //out
+    for(int i=help.size()-1;i>=0;i--)
+        finish+=help[i];
+    out<<endl<<"-----------------\nПостфиксная форма: "<<finish<<endl;
+    system("open ./out.txt");
     return 0;
 }
