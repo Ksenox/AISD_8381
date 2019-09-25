@@ -1,2 +1,0 @@
-Recursion depth = 0 Arguments = {ABB}{}{BB}
-Recursion depth = 1 Arguments = ABB
