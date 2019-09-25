@@ -1,5 +1,6 @@
 #include<iostream>
 #include<string>
+#include<fstream>
 using namespace std;
  
 int bracket(string s);
@@ -10,8 +11,22 @@ int rec=0, pos=0;
 int main(){
     int result;
     string s;
-	cout << "Enter boolean expression: " << endl;
-    getline(cin, s); 
+	int op;
+	char c;
+	cout << "0 boolean expression: read from console" << endl;
+	cout << "1: read from file" << endl;
+    cin >> op;
+	if(op==1){
+		ifstream f; 
+        f.open("input.txt"); 
+        f >> s;
+        if(!f.is_open()) 
+			cout << "ERROR";
+        f.close(); 
+	}
+	else{
+		getline(cin, s);
+	}
     s = replaceStr(s, "NOT TRUE", "0");
     s = replaceStr(s, "NOT FALSE", "1");
 	s = replaceStr(s, "NOT", "!");
@@ -22,11 +37,23 @@ int main(){
     s = replaceStr(s, " ", "");
 	s.insert(s.size(), " ");
     result = calc(s);
-	if(result)
-    	cout << "Result: TRUE" << endl;
-	else
-    	cout << "Result: FALSE" << endl;
-    cout << "Depth of Recursion: " << rec;
+	if(op == 0){
+		if(result)
+    		cout << "Result: TRUE" << endl;
+		else
+   	 		cout << "Result: FALSE" << endl;
+   	 	cout << "Depth of Recursion: " << rec;
+	}
+	if(op == 1){
+		ofstream ff;
+		ff.open("input.txt", ios::app);
+		if(result)
+    		ff << endl << "Result: TRUE" << endl;
+		else
+    		ff << "Result: FALSE" << endl;
+    	ff << "Depth of Recursion: " << rec;
+		ff.close();
+	}
     return 0;
 }
  
