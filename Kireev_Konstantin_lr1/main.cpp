@@ -45,14 +45,14 @@ int main(){
    	 	cout << "Depth of Recursion: " << rec;
 	}
 	if(op == 1){
-		ofstream ff;
-		ff.open("input.txt", ios::app);
+		ofstream f;
+		f.open("input.txt", ios::app);
 		if(result)
-    		ff << endl << "Result: TRUE" << endl;
+    		f << endl << "Result: TRUE" << endl;
 		else
-    		ff << "Result: FALSE" << endl;
-    	ff << "Depth of Recursion: " << rec;
-		ff.close();
+    		f << "Result: FALSE" << endl;
+    	f << "Depth of Recursion: " << rec;
+		f.close();
 	}
     return 0;
 }
