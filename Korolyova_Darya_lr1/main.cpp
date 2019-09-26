@@ -78,9 +78,6 @@ string ReadFromConsole () {
 }
 
 void NextSymbol (string& str, int& pos) {
-    /*for (int i = 0; i < pos; ++i) {
-        cout << " ";
-    }*/
     cout << str[0];
     str = str.substr(1);
     pos++;
