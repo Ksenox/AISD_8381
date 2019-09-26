@@ -1,3 +1,5 @@
+//скобки := A|(B скобки скобки)
+
 #include <iostream>
 #include <string>
 #include <fstream>
@@ -39,6 +41,7 @@ int main(){
         string arr;
         char a;
         int FlagErr;
+	cout<<"Enter a string:	";
         cin>>arr;
         bracket(arr,a,FlagErr);
         symbol(arr,a);
