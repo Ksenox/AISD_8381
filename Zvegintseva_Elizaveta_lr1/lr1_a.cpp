@@ -6,6 +6,8 @@ using namespace std;
 
 int opening_bracket = 0;
 int closing_bracket = 0;
+int simb = 0;
+int str_s = 0;
 
 int rec(string& str, ofstream& output)
 {
@@ -32,8 +34,13 @@ int rec(string& str, ofstream& output)
 				return 0;
 			if ((str[0] == '-' || str[0] == '*' || str[0] == '+') && ((str[1] >= 97 && str[1] <= 122) || str[1] == '(' || (str[0] >= 65 && str[0] <= 90)))
 			{
-				if (str[1] == '(')
+				if (str[1] == '(') {
 					opening_bracket++;
+					simb++;
+				}
+				if (str[1] != '(') {
+					simb+=2;
+				}
 				str = str.substr(2, str.size() - 2);
 				continue;
 			}
@@ -64,24 +71,35 @@ int rec(string& str, ofstream& output)
 
 				if ((str[0] == '-' || str[0] == '*' || str[0] == '+') && ((str[1] >= 97 && str[1] <= 122) || str[1] == '(' || (str[0] >= 65 && str[0] <= 90)))
 				{
-					if (str[1] == '(')
+					if (str[1] == '(') {
 						opening_bracket++;
+						simb++;
+					}
+					if (str[1] != '(') {
+						simb+=2;
+					}
 					str = str.substr(2, str.size() - 2);
+					
 					continue;
 				}
 				continue;
 			}
 			if ((str[0] >= 97 && str[0] <= 122) || (str[0] >= 65 && str[0] <= 90)) {
 				if (str[1] == '*' || str[1] == '+' || str[1] == '-') {
-					if ((str[2] >= 97 && str[2] <= 122) || (str[2] >= 65 && str[2] <= 90))
+					if ((str[2] >= 97 && str[2] <= 122) || (str[2] >= 65 && str[2] <= 90)) {
+						simb += 3;
 						return 3;
+					}
 					else {
 						str = str.substr(2, str.size() - 2);
+						simb += 2;
 						continue;
 					}
 				}
-				else
+				else {
+					simb++;
 					return 1;
+				}
 			}
 			output << "Error3" << endl;
 			cout << "Error3" << endl;
@@ -125,11 +143,18 @@ int main() {
 
 		output << str << endl;
 		cout << str << endl;
+		str_s = str.size();
 		rec(str, output);
 
 		if (opening_bracket == closing_bracket) {
-			output << "Correct" << endl;
-			cout << "Correct" << endl;
+			if (simb >= (2 * opening_bracket + 1)) {
+				output << "Correct" << endl;
+				cout << "Correct" << endl;
+			}
+			else {
+				output << "Ooops" << endl;
+				cout << "Ooops" << endl;
+			}
 		}
 		else {
 			output << "Invalid brackets" << endl;
