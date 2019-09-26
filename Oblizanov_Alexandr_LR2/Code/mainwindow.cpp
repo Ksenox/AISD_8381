@@ -101,7 +101,6 @@ string MainWindow::getInfo(string filePath)
 
 void MainWindow::on_file_clicked()
 {
-    this->resize(450, 450);
     QString fileName = QFileDialog::getOpenFileName(this, tr("Choose input file (TXT)"), QDir::homePath(), tr("*.txt"));
     if (QString::compare(fileName, QString()) != 0)
     {
