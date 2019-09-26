@@ -7,15 +7,16 @@ using namespace std;
 int opening_bracket = 0;
 int closing_bracket = 0;
 
-int rec(string &str, ofstream& output)
+int rec(string& str, ofstream& output)
 {
 
 	while (str.size())
 	{
 		//output << str << endl;
 		cout << str << endl;
-		
-		
+		cout << opening_bracket << endl;
+		cout << closing_bracket << endl;
+
 		if (((str[0] >= 97 && str[0] <= 122) || (str[0] >= 65 && str[0] <= 90)) && (str.size() == 1))
 			return 0;
 
@@ -30,7 +31,7 @@ int rec(string &str, ofstream& output)
 			if (str[0] == '\0')
 				return 0;
 			if ((str[0] == '-' || str[0] == '*' || str[0] == '+') && ((str[1] >= 97 && str[1] <= 122) || str[1] == '(' || (str[0] >= 65 && str[0] <= 90)))
-			{	
+			{
 				if (str[1] == '(')
 					opening_bracket++;
 				str = str.substr(2, str.size() - 2);
@@ -57,11 +58,12 @@ int rec(string &str, ofstream& output)
 					cout << "Error2" << endl;
 					exit(0);
 				}
-				
+
 				closing_bracket++;
 				str = str.substr(1, str.size() - 1);
+
 				if ((str[0] == '-' || str[0] == '*' || str[0] == '+') && ((str[1] >= 97 && str[1] <= 122) || str[1] == '(' || (str[0] >= 65 && str[0] <= 90)))
-				{	
+				{
 					if (str[1] == '(')
 						opening_bracket++;
 					str = str.substr(2, str.size() - 2);
@@ -69,21 +71,25 @@ int rec(string &str, ofstream& output)
 				}
 				continue;
 			}
-			if ((str[0] >= 97 && str[0] <= 122) || (str[0] >= 65 && str[0] <= 90))
-				if (str[2] >= 97 && str[2] <= 122 && (str[1] >= '*' || str[1] <= '+' || str[1] >= '-'))
-					return 3;
+			if ((str[0] >= 97 && str[0] <= 122) || (str[0] >= 65 && str[0] <= 90)) {
+				if (str[1] == '*' || str[1] == '+' || str[1] == '-') {
+					if ((str[2] >= 97 && str[2] <= 122) || (str[2] >= 65 && str[2] <= 90))
+						return 3;
+					else {
+						str = str.substr(2, str.size() - 2);
+						continue;
+					}
+				}
 				else
 					return 1;
+			}
 			output << "Error3" << endl;
 			cout << "Error3" << endl;
 			//output << str << endl;
 			cout << str << endl;
 			exit(0);
 
-
-
-
-		} 
+		}
 	}
 
 
@@ -93,7 +99,7 @@ int rec(string &str, ofstream& output)
 int main() {
 	{
 
-		ofstream output("/Users/Elizaveta/source/repos/lab1_a/output.txt");
+		ofstream output("/Users/Elizaveta/source/repos/lr1/output.txt");
 		string com, str;
 
 		cout << R"(Would u like to get input from "input.txt"? Y/N)" << endl;
@@ -117,13 +123,18 @@ int main() {
 			return 0;
 		}
 
+		output << str << endl;
 		cout << str << endl;
 		rec(str, output);
 
-		if (opening_bracket == closing_bracket)
+		if (opening_bracket == closing_bracket) {
+			output << "Correct" << endl;
 			cout << "Correct" << endl;
-		else
+		}
+		else {
+			output << "Invalid brackets" << endl;
 			cout << "Invalid brackets" << endl;
+		}
 		return 0;
 	}
 }
