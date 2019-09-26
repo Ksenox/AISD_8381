@@ -19,7 +19,7 @@ int main(){
 	if(op==1){
 		ifstream f; 
         f.open("input.txt"); 
-        f >> s;
+	getline(f, s);
         if(!f.is_open()) 
 			cout << "ERROR";
         f.close(); 
