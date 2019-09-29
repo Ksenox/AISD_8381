@@ -5,7 +5,6 @@ using namespace h_list;
 using namespace std;
 
 int main(){
-	setlocale (0,"Rus");
 	lisp s;
 	cout<<boolalpha;
 	cout<<"Enter a hierarchical list:	";
