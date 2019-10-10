@@ -42,7 +42,6 @@ void MainWindow::checkInput(){
     QString input = ui->inputLine->text();
     QStringList list = input.split(" ");
     int* arr = new int[list.length()];
-    int* newarr = new int[list.length()];
     string result;
 
     //check if string is unsupported
@@ -59,10 +58,10 @@ void MainWindow::checkInput(){
         arr[i] = list[i].toInt();
     }
 
-    rec(0, list.length(), arr, newarr, result);
+    arr = rec(0, list.length(), arr, result);
     result.append("Changed vector:\n");
     for (int i = 0; i < list.length(); ++i) {
-        result.append(to_string(newarr[i]) + " ");
+        result.append(to_string(arr[i]) + " ");
     }
 
     ui->windowResult->setText(QString::fromStdString(result));
@@ -71,5 +70,4 @@ void MainWindow::checkInput(){
     resultFile.close();
 
     delete[] arr;
-    delete[] newarr;
 }

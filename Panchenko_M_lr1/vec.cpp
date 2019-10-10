@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <algorithm>
 #include <stdlib.h>
 #include <ctype.h>
 #include <stdarg.h>
@@ -15,7 +16,8 @@
 #include <thread>
 #include <QApplication>
 
-void rec(int indent, int length, int *arr, int *newarr, string& result){
+int* rec(int indent, int length, int *arr, string& result){
+
     for(int i = 0; i < indent; i++)
         result.append("\t");
 
@@ -28,18 +30,19 @@ void rec(int indent, int length, int *arr, int *newarr, string& result){
 
     int halfl = length/2;
     if(length > 2){
-        rec(indent + 1, length - halfl, arr, newarr, result);
-        rec(indent + 1, halfl, arr + length - halfl, newarr + length - halfl, result);
+        rec(indent + 1, length - halfl, arr, result);
+        rec(indent + 1, halfl, arr + length - halfl, result);
     }
     if(length == 2){
-        (newarr[0] = (arr[0] <= arr[1]) ? arr[0] : arr[1]);
-        (newarr[1] = (arr[0] <= arr[1]) ? arr[1] : arr[0]);
+        int a = arr[0];
+        int b = arr[1];
+        (arr[0] = (a <= b) ? a : b);
+        (arr[1] = (a <= b) ? b : a);
     }
-    if(length == 1)
-        newarr[0] = arr[0];
 
     for(int i = 0; i < indent; i++)
         result.append("\t");
 
     result.append("<-- rec\n");
+    return arr;
 }
