@@ -62,9 +62,9 @@ public:
     S_expr* tail (const S_expr* s, string&);
     char getAtom (const S_expr* s, string&);
     S_expr* makeAtom (const char x);
-    int read_s_expr(S_expr*& s, string, string&);
-    int read(char prev, S_expr*& s, string &, int, string&);
-    int read_seq (S_expr*& s, string &, int, string&);
+    int read_s_expr(S_expr*& s, string, string&, int&);
+    int read(char prev, S_expr*& s, string &, int&, string&);
+    int read_seq (S_expr*& s, string &, int&, string&);
     S_expr* copy_list(const S_expr* x);
 };
 #endif

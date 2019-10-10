@@ -53,8 +53,7 @@ S_expr* HList::makeAtom(const char x){
     s->setNodeElement(x);
     return s;
 }
-int HList::read_s_expr(S_expr*& s, string list, string & result){
-    int i=0;
+int HList::read_s_expr(S_expr*& s, string list, string & result, int & i){
     while(list[i]==' '){
         i++;
     }
@@ -67,7 +66,7 @@ int HList::read_s_expr(S_expr*& s, string list, string & result){
     }
     return 0;
 }
-int HList::read(char prev, S_expr*& s, string & list, int i, string & result){
+int HList::read(char prev, S_expr*& s, string & list, int & i, string & result){
     if(prev == ')') {
         result.append(" ! List.Error. List can't begin with )\n");
         return 1;
@@ -81,7 +80,7 @@ int HList::read(char prev, S_expr*& s, string & list, int i, string & result){
     }
     return 0;
 }
-int HList::read_seq(S_expr*& s, string & list, int i, string & result){
+int HList::read_seq(S_expr*& s, string & list, int & i, string & result){
     S_expr* p1, *p2;
     i++;
     while(list[i] == ' '){
@@ -126,26 +125,3 @@ S_expr* HList::cons(S_expr* head, S_expr* tail, string & result){
         return s;
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

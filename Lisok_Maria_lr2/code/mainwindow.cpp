@@ -55,11 +55,12 @@ void MainWindow::checkLists(){
     QString input1 = ui->list1->text();
     QString input2 = ui->list2->text();
     string result;
-    if(hlist.read_s_expr(list1, input1.toUtf8().constData(), result)){
+    int i=0, k=0;
+    if(hlist.read_s_expr(list1, input1.toUtf8().constData(), result, i)){
         ui->resultWindow->setText(QString::fromStdString(result));
     }
 
-    else if(hlist.read_s_expr(list2, input2.toUtf8().constData(), result)){
+    else if(hlist.read_s_expr(list2, input2.toUtf8().constData(), result, k)){
         ui->resultWindow->setText(QString::fromStdString(result));
     }
 
