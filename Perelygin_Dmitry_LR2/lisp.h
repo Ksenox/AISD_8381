@@ -24,13 +24,13 @@ namespace h_list {
 	lisp tail(const lisp s);
 	lisp cons(const lisp h, const lisp t);
 	lisp make_atom(const base x);
-	void read_lisp(lisp& y);
-	void read_s_expr(base prev, lisp& y);
-	void read_seq(lisp& y);
+	void read_lisp(lisp& y, istream& in = cin);			// основная
+	void read_s_expr(char prev, lisp& y, istream& in);
+	void read_seq(lisp& y, istream& in);
 	void write_lisp(const lisp x);
 	void write_seq(const lisp x);
 	bool isNull(const lisp s);
 	bool isAtom(const lisp s);
 	void destroy(lisp s);
 	void red(lisp s, int& flag, char& a, char& b);
-}
+}#pragma once

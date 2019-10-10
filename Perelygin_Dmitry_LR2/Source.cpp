@@ -16,20 +16,17 @@ int main() {
 	lisp s;
 	char a = '9', b = '9';
 	int flag = 0;
-	
-		//cout << boolalpha;
-		cout << "ВВедите список:	";
-		read_lisp(s);
-	
+
+	//cout << boolalpha;
+	cout << "ВВедите список:	";
+	read_lisp(s);
+
 
 	red(s, flag, a, b);
 	cout << a << endl;
+	cout << "Сокращенный список: ";
 	write_lisp(s);
 	cout << endl;
 
 	return 0;
 }
-	//(&A(|B(-B)))
-	//(&A(&B(-B)))
-	//(&A(&B(C)))
-	//(&A(&B(|CC)))
