@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/resources">
+        <file>img/sort.jpg</file>
+        <file>img/info.png</file>
+        <file>img/array.png</file>
+        <file>img/steps.png</file>
+    </qresource>
+</RCC>
