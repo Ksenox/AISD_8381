@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>PREFIX</title>
+    <link rel="stylesheet" href="../src/lr3screen.css">
+
+</head>
+
+<body>
+    <div class="form">
+        <label class="FormLabel" for="prefix">Префиксное выражение</label>
+        <textarea id="prefix" name="prefix" cols="30" rows="2">+++2222</textarea>
+        <label class="FormLabel" for="stepbystepflag">Пошаговое решение</label>
+        <input type="checkbox" name="step_by_step" id="stepbystepflag"></input>
+        <button id='button_go' style="width: 100%" onclick="test()">GO!</button>
+        <hr width="100%">
+        <button id='button_step' style="width: 100%" onclick="get_str()">Step up</button>
+    </div>
+    <p>Результат:</p>
+    <table border=1>
+        <thead>
+            <tr>
+                <td>#</td>
+                <td width=300px>Входное выражение</td>
+                <td width=300px>Выход</td>
+            </tr>
+        </thead>
+        <tbody id="step_value">
+            <tr>
+                <td>1</td>
+                <td>2</td>
+                <td>3</td>
+            </tr>
+        </tbody>
+    </table>
+    <br>
+    <form action="/lr_3_pref" method="get">
+        <label for="team_name">Want to start over?</label>
+        <input type="submit" value="Anew">
+    </form>
+    <script src="../src/lr_3_script.js"></script>
+</body>
+
+</html>
+<!--  
+    document.CreateElement()
+    $$("#step_value")
+[tbody#step_value]0: tbody#step_valueaccessKey: ""align: ""assignedSlot: nullattributeStyleMap: StylePropertyMap {size: 0}attributes: NamedNodeMap {0: id, id: id, length: 1}autocapitalize: ""baseURI: "http://localhost:3000/lr_3_pref"ch: ""chOff: ""childElementCount: 1childNodes: NodeList(3) [text, tr, text]children: HTMLCollection [tr]classList: DOMTokenList [value: ""]className: ""clientHeight: 24clientLeft: 0clientTop: 0clientWidth: 629contentEditable: "inherit"dataset: DOMStringMap {}dir: ""draggable: falseelementTiming: ""enterKeyHint: ""firstChild: textfirstElementChild: trhidden: falseid: "step_value"innerHTML: "↵            <tr>↵                <td>1</td>↵                <td>2</td>↵                <td>3</td>↵            </tr>↵        "innerText: "1	2	3"inputMode: ""isConnected: trueisContentEditable: falselang: ""lastChild: textlastElementChild: trlocalName: "tbody"namespaceURI: "http://www.w3.org/1999/xhtml"nextElementSibling: nullnextSibling: textnodeName: "TBODY"nodeType: 1nodeValue: nullnonce: ""offsetHeight: 24offsetLeft: 0offsetParent: tableoffsetTop: 26offsetWidth: 629onabort: nullonauxclick: nullonbeforecopy: nullonbeforecut: nullonbeforepaste: nullonblur: nulloncancel: nulloncanplay: nulloncanplaythrough: nullonchange: nullonclick: nullonclose: nulloncontextmenu: nulloncopy: nulloncuechange: nulloncut: nullondblclick: nullondrag: nullondragend: nullondragenter: nullondragleave: nullondragover: nullondragstart: nullondrop: nullondurationchange: nullonemptied: nullonended: nullonerror: nullonfocus: nullonformdata: nullonfullscreenchange: nullonfullscreenerror: nullongotpointercapture: nulloninput: nulloninvalid: nullonkeydown: nullonkeypress: nullonkeyup: nullonload: nullonloadeddata: nullonloadedmetadata: nullonloadstart: nullonlostpointercapture: nullonmousedown: nullonmouseenter: nullonmouseleave: nullonmousemove: nullonmouseout: nullonmouseover: nullonmouseup: nullonmousewheel: nullonpaste: nullonpause: nullonplay: nullonplaying: nullonpointercancel: nullonpointerdown: nullonpointerenter: nullonpointerleave: nullonpointermove: nullonpointerout: nullonpointerover: nullonpointerrawupdate: nullonpointerup: nullonprogress: nullonratechange: nullonreset: nullonresize: nullonscroll: nullonsearch: nullonseeked: nullonseeking: nullonselect: nullonselectionchange: nullonselectstart: nullonstalled: nullonsubmit: nullonsuspend: nullontimeupdate: nullontoggle: nullonvolumechange: nullonwaiting: nullonwebkitfullscreenchange: nullonwebkitfullscreenerror: nullonwheel: nullouterHTML: "<tbody id="step_value">↵            <tr>↵                <td>1</td>↵                <td>2</td>↵                <td>3</td>↵            </tr>↵        </tbody>"outerText: "1	2	3"ownerDocument: documentparentElement: tableparentNode: tablepart: DOMTokenList [value: ""]prefix: nullpreviousElementSibling: theadpreviousSibling: textrows: HTMLCollection [tr]scrollHeight: 24scrollLeft: 0scrollTop: 0scrollWidth: 629shadowRoot: (...)slot: ""spellcheck: truestyle: CSSStyleDeclaration {alignContent: "", alignItems: "", alignSelf: "", alignmentBaseline: "", all: "", …}tabIndex: -1tagName: "TBODY"textContent: "↵            ↵                1↵                2↵                3↵            ↵        "title: ""translate: truevAlign: ""__proto__: HTMLTableSectionElementlength: 1__proto__: Array(0)concat: ƒ concat()constructor: ƒ Array()copyWithin: ƒ copyWithin()entries: ƒ entries()every: ƒ every()fill: ƒ fill()filter: ƒ filter()find: ƒ find()findIndex: ƒ findIndex()flat: ƒ flat()flatMap: ƒ flatMap()forEach: ƒ forEach()includes: ƒ includes()indexOf: ƒ indexOf()join: ƒ join()keys: ƒ keys()lastIndexOf: ƒ lastIndexOf()length: 0map: ƒ map()pop: ƒ pop()push: ƒ push()reduce: ƒ reduce()reduceRight: ƒ reduceRight()reverse: ƒ reverse()shift: ƒ shift()slice: ƒ slice()some: ƒ some()sort: ƒ sort()splice: ƒ splice()toLocaleString: ƒ toLocaleString()toString: ƒ toString()unshift: ƒ unshift()values: ƒ values()Symbol(Symbol.iterator): ƒ values()Symbol(Symbol.unscopables): {copyWithin: true, entries: true, fill: true, find: true, findIndex: true, …}__proto__: Object
+var ee =$$("#step_value")[0]
+undefined
+ee
+<tbody id=​"step_value">​<tr>​<td>​1​</td>​<td>​2​</td>​<td>​3​</td>​</tr>​</tbody>​
+ee.innerHTML+=<tr>
+                <td>1</td>
+                <td>2</td>
+                <td>3</td></tr>
+VM1000:1 Uncaught SyntaxError: Unexpected token '<'
+ee.innerHTML+=`<tr>
+                <td>1</td>
+                <td>2</td>
+                <td>3</td></tr>`
+"
+            <tr>
+                <td>1</td>
+                <td>2</td>
+                <td>3</td>
+            </tr>
+        <tr>
+                <td>1</td>
+                <td>2</td>
+                <td>3</td></tr>"
+ee=0
+0
+ee.innerHTML+=''
+"undefined"
+ee.innerHTML=''
+""
+ee
+0
+var ee =$$("#step_value")[0]
+undefined
+ee.innerHTML=''
+""
+ee.innerHTML+=`<tr>
+                <td>1</td>
+                <td>2</td>
+                <td>3</td></tr>`
+"<tr>
+                <td>1</td>
+                <td>2</td>
+                <td>3</td></tr>"
+-->
