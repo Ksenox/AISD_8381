@@ -147,7 +147,7 @@ int startConsole()
         string filePath;
         cout << "Type file path" << endl;
         cin >> filePath;
-        ifstream fin(filePath);
+        ifstream fin(filePath, ios::in);
         if (fin)
         {
             getline(fin, bolts);
@@ -171,16 +171,20 @@ int startConsole()
     int num = checkStr(bolts, nuts);
     switch (num) {
     case 0:
-        fout << "Error! Inputs are empty\n";
+        cout << "Error! Inputs are empty\n";
+        return 0;
         break;
     case ERR_SYMB_B:
-        fout << "Error! Bolts input contains not only digits\n";
+        cout << "Error! Bolts input contains not only digits\n";
+        return 0;
         break;
     case ERR_SYMB_N:
-        fout << "Error! Nuts input contains not only digits\n";
+        cout << "Error! Nuts input contains not only digits\n";
+        return 0;
         break;
     case ERR_LENGTH:
-        fout << "Error! Number of bolts does not match number of nuts\n";
+        cout << "Error! Number of bolts does not match number of nuts\n";
+        return 0;
         break;
     }
     boltsArr = makeArray(bolts, num);
