@@ -139,7 +139,7 @@ string getPairs(dArr &bolts, dArr &nuts)
     return output;
 }
 
-int qsortNB(dArr &bolts, dArr &nuts, int start, int length, flags &opt, ofstream &fout)
+int qsortNB(dArr &bolts, dArr &nuts, int start, int length, flags &opt, ofstream &fout, int &n)
 {
     int ret = 0;
     QMessageBox out;
@@ -149,6 +149,7 @@ int qsortNB(dArr &bolts, dArr &nuts, int start, int length, flags &opt, ofstream
     int bigger = start;
     if (length - start > 1)
     {
+        n++;
         int center = nuts.base[length-1];
         int i = start;
         while (i<length-1)
@@ -177,7 +178,10 @@ int qsortNB(dArr &bolts, dArr &nuts, int start, int length, flags &opt, ofstream
                 if (equiv == false)
                     equiv = true;
                 else
+                {
+                    fout << "Error! Found same bolts" << endl;
                     return 2;
+                }
                 if (opt.step)
                 {
                     output += "Element from bolts is equal, swapping to end\n";
@@ -233,7 +237,10 @@ int qsortNB(dArr &bolts, dArr &nuts, int start, int length, flags &opt, ofstream
                 if (equiv == false)
                     equiv = true;
                 else
+                {
+                    fout << "Error! Found same nuts" << endl;
                     return 2;
+                }
                 if (opt.step)
                 {
                     output += "Element from nuts is equal, swapping to end\n";
@@ -259,15 +266,15 @@ int qsortNB(dArr &bolts, dArr &nuts, int start, int length, flags &opt, ofstream
             }
             i++;
         }
-        ret = qsortNB(bolts, nuts, start, bigger, opt, fout);
+        ret = qsortNB(bolts, nuts, start, bigger, opt, fout, n);
         if (ret)
             return ret;
-        ret = qsortNB(bolts, nuts, bigger, length-1, opt, fout);
+        ret = qsortNB(bolts, nuts, bigger, length-1, opt, fout, n);
     }
     return ret;
 }
 
-int sortBN(dArr &bolts, dArr &nuts, flags &opt, ofstream &fout)
+int sortBN(dArr &bolts, dArr &nuts, flags &opt, ofstream &fout, int &n)
 {
-    return qsortNB(bolts, nuts, 0, bolts.length, opt, fout);
+    return qsortNB(bolts, nuts, 0, bolts.length, opt, fout, n);
 }

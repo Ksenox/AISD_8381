@@ -110,7 +110,8 @@ void MainWindow::on_start_clicked()
         fout << "Nuts:\n";
         fout << getStrFromArray(nutsArr);
         fout << "\n";
-        if (!sortBN(boltsArr, nutsArr, opt, fout))
+        int n = 0;
+        if (!sortBN(boltsArr, nutsArr, opt, fout, n))
         {
             if (!checkPairs(boltsArr, nutsArr))
                 fout << "There are unpairable bolts and nuts\n";
@@ -122,6 +123,7 @@ void MainWindow::on_start_clicked()
                 fout << getStrFromArray(nutsArr);
                 fout << "Pairs of bolts and nuts:\n";
                 fout << getPairs(boltsArr, nutsArr);
+                fout << "Recursion deep: " << n << endl;
             }
         }
         else

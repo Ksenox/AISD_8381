@@ -44,6 +44,6 @@ string getStrSwapAction(dArr &input, int ptr1, int ptr2);
 string getStrCmpAction(dArr &bolts, int ptr1, dArr &nuts, int ptr2);
 int checkPairs(dArr &bolts, dArr &nuts);
 
-int sortBN(dArr &bolts, dArr &nuts, flags &opt, ofstream &fout);
+int sortBN(dArr &bolts, dArr &nuts, flags &opt, ofstream &fout, int &n);
 
 #endif // DARR_H
