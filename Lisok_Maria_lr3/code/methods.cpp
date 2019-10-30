@@ -59,6 +59,8 @@ long long int calculation(const string& str, string & output, string & err){
     Stack<long long int> stack{};
     for(long long int i=0; i<str.length(); i++){
         onestep(str[i], stack, output, err);
+        if(!err.empty())
+            return 0;
     }
     long long int result = *stack.onTop();
     stack.pop();
