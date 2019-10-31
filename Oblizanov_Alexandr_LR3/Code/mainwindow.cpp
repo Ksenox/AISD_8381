@@ -84,6 +84,7 @@ void MainWindow::on_start_clicked()
     flags opt;
     opt.info = ui->checkInfo->isChecked();
     opt.step = ui->checkStep->isChecked();
+    opt.console = false;
     ofstream fout("output.txt");
     int num = checkStr(bolts, nuts);
     switch (num) {

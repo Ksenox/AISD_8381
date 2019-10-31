@@ -3,7 +3,6 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
-#include <QMessageBox>
 #include <QMainWindow>
 #include <QGraphicsEffect>
 #include <QGraphicsView>
@@ -33,6 +32,7 @@ struct flags
 {
     bool step;
     bool info;
+    bool console;
 };
 
 int strCount(string &input);

@@ -139,11 +139,26 @@ string getPairs(dArr &bolts, dArr &nuts)
     return output;
 }
 
+int GUIOut (string output)
+{
+    QMessageBox out;
+    out.setStandardButtons(QMessageBox::Ok | QMessageBox::Cancel);
+    out.setText(QString::fromStdString(output));
+    if (out.exec() == QMessageBox::Cancel)
+        return 1;
+    return 0;
+}
+
+int consoleOut (string output)
+{
+    cout << output << endl;
+    cout << "Press any key to continue" << endl;
+    getchar();
+}
+
 int qsortNB(dArr &bolts, dArr &nuts, int start, int length, flags &opt, ofstream &fout, int &n)
 {
     int ret = 0;
-    QMessageBox out;
-    out.setStandardButtons(QMessageBox::Ok | QMessageBox::Cancel);
     string output;
     bool equiv = false;
     int bigger = start;
@@ -201,9 +216,11 @@ int qsortNB(dArr &bolts, dArr &nuts, int start, int length, flags &opt, ofstream
                 fout << output << endl;
             if (opt.step)
             {
-                out.setText(QString::fromStdString(output));
-                if (out.exec() == QMessageBox::Cancel)
-                          return 1;
+                if (opt.console)
+                    consoleOut(output);
+                else
+                    if (GUIOut(output))
+                        return 1;
             }
             i++;
         }
@@ -260,9 +277,11 @@ int qsortNB(dArr &bolts, dArr &nuts, int start, int length, flags &opt, ofstream
                 fout << output << endl;
             if (opt.step)
             {
-                out.setText(QString::fromStdString(output));
-                if (out.exec() == QMessageBox::Cancel)
-                    return 1;
+                if (opt.console)
+                    consoleOut(output);
+                else
+                    if (GUIOut(output))
+                        return 1;
             }
             i++;
         }
