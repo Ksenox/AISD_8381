@@ -1,0 +1,9 @@
+<RCC>
+    <qresource prefix="/img">
+        <file>img/add.png</file>
+        <file>img/applicationexit.png</file>
+        <file>img/help.png</file>
+        <file>img/info.png</file>
+        <file>img/cover.jpg</file>
+    </qresource>
+</RCC>
