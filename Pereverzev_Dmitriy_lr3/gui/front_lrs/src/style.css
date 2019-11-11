@@ -1,0 +1,9 @@
+*{font-family:sans-serif}
+body{margin:0}
+.LabContainer{display:flex;justify-content:space-around;width:100%;align-items:center;height:100vh}
+.LabContainer>a{width:200px;height:200px;text-align:center;line-height:200px;background-color:grey;text-decoration:none;color:#fff;border-radius:5px}
+a.disabled,a.disabled:hover{pointer-events:none}
+
+.form {
+    width:100%;
+}
