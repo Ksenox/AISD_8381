@@ -9,7 +9,62 @@ Function::Function(QString functionString)
     }
 
     this->functionString = functionString;
+
+
+
+    for(int i = 0; i < functionString.size(); i++)
+    {
+        if(functionString[i] == 'm')
+        {
+            if(i + 1 >= functionString.size()) throw "Неправильная строка";
+            if(functionString[i+1] != '(') throw "Неправильная строка";
+        }
+        else if(functionString[i] == 'M')
+        {
+            if(i + 1 >= functionString.size()) throw "Неправильная строка";
+            if(functionString[i+1] != '(') throw "Неправильная строка";
+        }
+        else if(functionString[i] == '(')
+        {
+            if(i + 3 >= functionString.size()) throw "Неправильная строка";
+
+            if(functionString[i+1] != 'M' && functionString[i+1] != 'm' && functionString[i+1].isDigit() == false) throw "Неправильная строка";
+
+        }
+        else if(functionString[i] == ')')
+        {
+            if(i < 5) throw "Неправильная строка";
+
+            if(functionString[i-1] != 'M' && functionString[i-1] != 'm' && functionString[i-1] != ')' && functionString[i-1].isDigit() == false)  throw "Неправильная строка";
+            if(i != functionString.size() - 1)
+            if(functionString[i+1] != ')' && functionString[i+1] != ',') throw "Неправильная строка";
+        }
+        else if(functionString[i] == ',')
+        {
+            if(i == 0 || i == functionString.size()-1) throw "Неправильная строка";
+            else {
+                if(functionString[i-1] != ')' && functionString[i-1].isDigit() == false) throw "Неправильная строка";
+                else {
+                    if(functionString[i+1] != 'm' && functionString[i+1] != 'M' && functionString[i+1].isDigit() == false)
+                        throw "Неправильная строка";
+                }
+
+            }
+        }
+        else if(functionString[i].isDigit())
+        {
+            if(functionString.size() != 1)
+            {
+                if(i == 0 || i == functionString.size()) throw "Неправильная строка";
+                else {
+                    if((functionString[i-1] != ',' || functionString[i+1] != ')') && (functionString[i-1] != '(' || functionString[i+1] != ',')) throw "Неправильная строка";
+                }
+            }
+        }
+    }
 }
+
+
 
 bool isLeftBracket(QChar element)
 {
@@ -69,9 +124,13 @@ int Function::calculate()
         if(currentElement == ',') continue;
         else if(isRightBracket(currentElement) == false)
         {
-            if(isLeftBracket(currentElement) == false) stack.add(currentElement);
+            if(isLeftBracket(currentElement) == false)
+            {
+                stack.add(currentElement);
+            }
         }
         else {
+            if(stack.size < 3) throw "Неправильная строка";
             int lastExpressionResult = calculateLastKnownExpression(stack);
             stack.add(QString::number(lastExpressionResult).at(0));
         }
@@ -130,7 +189,9 @@ int Function::calculateStepByStepForConsole()
         std::cout << "Содержимое стека:" << "\n";
         std::cout << stack.getStr(true).toStdString();
         std::cout << "\n";
+        std::cout << "Для продолжения нажмите enter..." << "\n";
 
+        std::cin.get();
     }
 
     QChar ans = stack.take();

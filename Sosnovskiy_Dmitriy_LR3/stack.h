@@ -9,6 +9,7 @@ public:
     void add(QChar element);
     QChar take();
     QString getStr(bool isCons = false);
+    int size = 0;
 private:
     StackElement* head;
 };

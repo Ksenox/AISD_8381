@@ -80,7 +80,7 @@
       <property name="font">
        <font>
         <family>Consolas</family>
-        <pointsize>16</pointsize>
+        <pointsize>10</pointsize>
        </font>
       </property>
       <property name="readOnly">

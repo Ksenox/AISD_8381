@@ -12,6 +12,7 @@ void Stack::add(QChar element)
     newStackElement->nextElement = head;
 
     head = newStackElement;
+    size++;
 }
 
 QChar Stack::take()
@@ -24,6 +25,7 @@ QChar Stack::take()
 
     delete previousHead;
 
+    size--;
     return answer;
 }
 
