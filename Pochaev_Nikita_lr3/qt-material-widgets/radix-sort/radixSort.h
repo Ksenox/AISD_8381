@@ -5,22 +5,6 @@
 
 #define ITERCOUNT 32
 
-class radix_test
-{
-    const int bit; // bit position [0..31] to examine
-
-    public:
-        radix_test(int offset) : bit(offset) {} // constructor
-
-        bool operator()(int value) const // function call operator
-        {
-            if (bit == 31) // sign bit
-                return value < 0; // negative int to left partition
-            else
-                return !(value & (1 << bit)); // 0 bit to left partition
-        }
-};
-
 //  Radix sort comparator for 32-bit two's complement integers
 class radixSort : public QObject
 {
@@ -38,6 +22,8 @@ class radixSort : public QObject
         void printResFile();
 
         int lsb;
+
+        int operationsCounter;
 
     public:
         explicit radixSort(QObject *parent = nullptr);

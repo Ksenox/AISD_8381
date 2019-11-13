@@ -50,5 +50,6 @@
 #include <QEventLoop>
 #include <QTimer>
 #include <QColor>
+#include <QDebug>
 
 #endif // BASICHEADERS_H

@@ -1,6 +1,7 @@
 #include "basicheaders.h"
 #include "radixSort.h"
 #include "console.h"
+#include "partitioncustom.h"
 
 radixSort::radixSort(bool sortFlag, bool stepFlag, bool consoleMode)
 {
@@ -10,11 +11,14 @@ radixSort::radixSort(bool sortFlag, bool stepFlag, bool consoleMode)
     this->printResFlag = false;
 
     lsb = 0;
+
+    operationsCounter = 0;
 }
 
 //  Least significant digit radix sort
 void radixSort::lsd_radix_sort()
 {
+    operationsCounter++;
     QFile log("../log.txt");
     log.open(QIODevice::Append);
     QTextStream logStream(&log);
@@ -33,7 +37,7 @@ void radixSort::lsd_radix_sort()
         logStream << endl;
         if(consoleMode == false) emit strToPrintInWindow("\n");
     }
-    std::stable_partition(inpArr.begin(), inpArr.end(), radix_test(lsb));
+    stablePartitionCustom(inpArr.begin(), inpArr.end(), radix_test(lsb), operationsCounter);
     ++lsb;
     log.close();
 }
@@ -44,8 +48,9 @@ void radixSort::msd_radix_sort(std::vector<int32_t>::iterator first, \
 {
     if (first != last && msb >= 0)
     {
-        std::vector<int32_t>::iterator mid = std::partition(first, \
-                                                            last, radix_test(msb));
+        operationsCounter++;
+        std::vector<int32_t>::iterator mid = partitionCustom(first, last, \
+                                             radix_test(msb), operationsCounter);
         msb--; // decrement most-significant-bit
         msd_radix_sort(first, mid, msb); // sort left partition
         msd_radix_sort(mid, last, msb); // sort right partition
@@ -61,6 +66,7 @@ void radixSort::writeData(std::vector<int32_t> inpArr)
 
 void radixSort::mainSortFunc()
 {
+    if(DEBUG) qDebug() << "mainSortFunc implements" << endl;
     QFile log("../log.txt");
     log.open(QIODevice::Append);
     QTextStream logStream(&log);
@@ -93,6 +99,18 @@ void radixSort::mainSortFunc()
     }
 
     log.close();
+
+    QFile assessment("../assessment.txt");
+    assessment.open(QIODevice::Append);
+    QTextStream assessmentStream(&assessment);
+
+    QString temp;
+    temp = sortFlag ? " LSD " : " MSD ";
+    assessmentStream << "For sorting of " << inpArr.size() << " elements array ";
+    assessmentStream << "by " << temp << "sort ";
+    assessmentStream << "was made " << operationsCounter << " operations." << endl << endl;
+
+    assessment.close();
 }
 
 void radixSort::implementForFile(QString fileName)

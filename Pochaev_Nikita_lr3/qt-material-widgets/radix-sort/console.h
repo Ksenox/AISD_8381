@@ -8,11 +8,11 @@
 
 class Console
 {
-        private:
-            radixSort *workSort;
-        public:
-            Console();
-            void consoleExec();
+    private:
+        radixSort *workSort;
+    public:
+        Console();
+        void consoleExec();
 };
 
 #endif // CONSOLE_H

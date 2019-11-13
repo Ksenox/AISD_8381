@@ -8,6 +8,7 @@ SOURCES = mainwindow.cpp \
 HEADERS = mainwindow.h \
     basicheaders.h \
     console.h \
+    partitioncustom.h \
     radixSort.h
 LIBS += $$top_builddir/components/$(OBJECTS_DIR)/libcomponents.a
 INCLUDEPATH += $$top_srcdir/components/
