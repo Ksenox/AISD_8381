@@ -27,6 +27,7 @@ FORMS += \
     mainwindow.ui
 
 # Default rules for deployment.
+QMAKE_CXXFLAGS_WARN_ON
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target

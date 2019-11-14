@@ -86,13 +86,13 @@ public:
 
     bool IsEmpty()
     {
+
         return len == 0;
     }
 
 };
 
-int check()
-{}
+
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -109,38 +109,27 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_pushButton_3_clicked()
 {
-    /*QString fileName = QFileDialog::getOpenFileName(this,
-                                QString::fromUtf8("Открыть файл"),
-                                QDir::currentPath(),
-                                "Images (*.png *.xpm *.jpg);;All files (*.*)");*/
+
     QString FileName = QFileDialog::getOpenFileName(this, "OpenDialog",
     QDir::homePath(), "*.txt;; *.*");
     Name = FileName.toStdString();
 
 }
-//void QTextEdit::append ( const QString & text )
-/* for( ; ; )
-                {
-                QApplication::processEvents();
-                if(!started)break;
 
-
-                }
-                started = true;*/
 
 void MainWindow::on_pushButton_clicked()
 {
-    using namespace std;
+        using namespace std;
         ui->textBrowser->clear();
-        bool correct = true;
-        int i = 0, j = 0;
+        bool correct = true, cmp = false;
+        unsigned int i = 0;
+        int j = 0;
 
         string out;
         string text;
          vector<char> show;
 
         ifstream fin;
-        //cout << Name;
         fin.open(Name);
         getline(fin, text);
         fin.close();
@@ -152,18 +141,19 @@ void MainWindow::on_pushButton_clicked()
         ui->textBrowser->insertPlainText("\n\n\n");
         if(text.length()==0)
         {
-            ui->textBrowser->insertPlainText("NOPE ");
+            //ui->textBrowser->insertPlainText("NOPE ");
             correct=false;
         }
         while (i< text.length())
         {
+            cmp = false;
             ui->textBrowser->insertPlainText("Input:\n\n\n");
             while (text[i] != 'C')
             {
                 if (text[i]== 'D' || i == text.length())
                 {
 
-                    ui->textBrowser->insertPlainText("NOPE ");
+                   // ui->textBrowser->insertPlainText("NOPE ");
                     correct=false;
                     break;
                 }
@@ -178,7 +168,6 @@ void MainWindow::on_pushButton_clicked()
                  }
 
                 i++;
-                //cout << i << '\n';
 
             }
             if (correct==false)
@@ -188,6 +177,12 @@ void MainWindow::on_pushButton_clicked()
             while (i<text.length() && text[i] != 'D')
             {
                 char temp;
+                if (S.IsEmpty()==true )
+                {
+                    ui->textBrowser->insertPlainText("EMPTY STACK\n");
+                    correct = false;
+                    break;
+                }
                 temp = S.Pop();
                 ui->textBrowser->insertPlainText("Stack:\n");
                 for (j=show.size()-1;j>=0;j--)
@@ -202,9 +197,8 @@ void MainWindow::on_pushButton_clicked()
                 ui->textBrowser->insertPlainText("\n");
                 if (temp != text[i])
                 {
-                    ui->textBrowser->insertPlainText("NOPE ");
-                    cout << temp << "   " << text[i] << '\n';
-                    cout << i << '\n';
+                    //ui->textBrowser->insertPlainText("NOPE ");
+                    S.Clear();
                     correct = false;
                     break;
                 }
@@ -212,19 +206,26 @@ void MainWindow::on_pushButton_clicked()
                 {
                     show.pop_back();
                     i++;
+                    cmp = true;
                     ui->textBrowser->insertPlainText("Succeed check!:\n");
                 }
 
+            }
+            if (!S.IsEmpty())
+            {
+                ui->textBrowser->insertPlainText("DIF LENGTH:\n");
+                correct = false;
             }
             if (correct==false)
             break;
             i++;
         }
-        if (correct)
+        if (correct && cmp)
         {
         ui->textBrowser->insertPlainText("YES");
         }
-
+        else
+        ui->textBrowser->insertPlainText("NOPE ");
 }
 
 void MainWindow::on_pushButton_2_clicked()
@@ -241,8 +242,10 @@ void MainWindow::on_pushButton_5_clicked()
 {
     using namespace std;
     ui->textBrowser->clear();
-        bool correct = true;
-        int i = 0, j = 0;
+        bool correct = true, cmp = false;
+        unsigned int i = 0;
+        int j = 0;
+
 
         string out;
         string text;
@@ -263,11 +266,12 @@ void MainWindow::on_pushButton_5_clicked()
         ui->textBrowser->insertPlainText("\n\n\n");
         if(text.length()==0)
         {
-            ui->textBrowser->insertPlainText("NOPE ");
+            //ui->textBrowser->insertPlainText("NOPE ");
             correct=false;
         }
         while (i< text.length())
         {
+            cmp = false;
             ui->textBrowser->insertPlainText("Input:\n\n\n");
                         for( ; ; )
                         {
@@ -282,7 +286,7 @@ void MainWindow::on_pushButton_5_clicked()
                 if (text[i]== 'D' || i == text.length())
                 {
 
-                    ui->textBrowser->insertPlainText("NOPE ");
+                    //ui->textBrowser->insertPlainText("NOPE ");
                     correct=false;
                     break;
                 }
@@ -312,19 +316,26 @@ void MainWindow::on_pushButton_5_clicked()
             i++;
 
             ui->textBrowser->insertPlainText("Check symbols after C:\n\n\n");
+
             while (i<text.length() && text[i] != 'D')
             {
+                for( ; ; )
+                {
+                QApplication::processEvents();
+                if(!started)break;
 
+
+                }
+                started = true;
+                if (S.IsEmpty()==true)
+                {
+                    ui->textBrowser->insertPlainText("EMPTY STACK\n");
+                    correct = false;
+                    break;
+                }
                 char temp;
                 temp = S.Pop();
-                                for( ; ; )
-                                {
-                                QApplication::processEvents();
-                                if(!started)break;
 
-
-                                }
-                                started = true;
                 ui->textBrowser->insertPlainText("Stack:\n");
                 for (j=show.size()-1;j>=0;j--)
                 {
@@ -338,9 +349,7 @@ void MainWindow::on_pushButton_5_clicked()
                 ui->textBrowser->insertPlainText("\n");
                 if (temp != text[i])
                 {
-                    ui->textBrowser->insertPlainText("NOPE ");
-                    cout << temp << "   " << text[i] << '\n';
-                    cout << i << '\n';
+                    S.Clear();
                     correct = false;
                     break;
                 }
@@ -348,17 +357,25 @@ void MainWindow::on_pushButton_5_clicked()
                 {
                     show.pop_back();
                     i++;
+                    cmp = true;
                     ui->textBrowser->insertPlainText("Succeed check!:\n");
                 }
 
+            }
+            if (!S.IsEmpty())
+            {
+                ui->textBrowser->insertPlainText("DIF LENGTH:\n");
+                correct = false;
             }
             if (correct==false)
             break;
             i++;
         }
-        if (correct)
+        if (correct && cmp)
         {
         ui->textBrowser->insertPlainText("YES");
         }
+        else
+        ui->textBrowser->insertPlainText("NOPE ");
 
 }
