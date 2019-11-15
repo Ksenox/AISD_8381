@@ -18,10 +18,13 @@ public:
 
 private slots:
     void build();
+    void build_file();
     void run();
+    void step();
 
 private:
     lab4* lr;
+    int stepPointer;
     Ui::MainWindow *ui;
 };
 

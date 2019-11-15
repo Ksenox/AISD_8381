@@ -14,6 +14,18 @@ class lab4 {
 private:
     string templ;
 
+    static_tree<char>* temp;
+    measuring_array<int>* locator;
+    int new_pos;
+    static_tree<char>* sub_tree;
+    static_tree<char>* f1;
+    static_tree<char>* f2;
+    static_tree<char>* f3;
+    static_tree<char>* f4;
+    static_tree<char>* copy;
+    bool first_pair_equal;
+    bool second_pair_equal;
+
 public:
     string base;
     string state;
@@ -21,7 +33,7 @@ public:
 
     void launch(string& str);
     void rush();
-    void step(int i);
+    void step(int* i);
 };
 
 
