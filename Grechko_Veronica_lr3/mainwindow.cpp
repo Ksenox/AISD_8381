@@ -1,7 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <string>
-
+#include <time.h>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -20,6 +20,7 @@ void MainWindow::on_pushButton_clicked()
         QString data = ui->textEdit->toPlainText();
         QStringList abc = data.split(' ');
         QStringList result;
+        clock_t time;
         int* mas = new int[100];
         int i =0;
         bool go = true;
@@ -40,15 +41,17 @@ void MainWindow::on_pushButton_clicked()
             QString out_n;
 
             auto repr = new string();
-            cmp_t->quickSort(mas, 0, i, i, repr);
+            time = clock();
+            cmp_t->quickSort(mas, 0, i, i + 1, repr);
+            time = clock() - time;
+            QString time_a;
+            time_a.append("Время работы составило: ");
+            time_a.append(QString::number((double)time/CLOCKS_PER_SEC));
+            time_a.append("     размер массива: ");
+            time_a.append(QString::number(i + 1));
+            ui->label_3->setText(time_a);
             out_n.append(QString::fromStdString(*repr));
-
-            for (int k =0; k < i; k++){
-                out_n.append(QString::number(mas[k]));
-                out_n.append(" ");
-            }
-
-            ui->label_3->setText(out_n);
+            ui->textEdit_2->setText(out_n);
         }
         else QMessageBox::warning(this,"Error", "Incorrect input");
 }

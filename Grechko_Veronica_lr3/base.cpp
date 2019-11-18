@@ -30,7 +30,7 @@ void cmp_type::quickSort(int *numbers, int left, int right, int size, string* re
   left = l_hold;
 
   repr->append("\n[");
-  for (int i = 0; i < size; i++) {
+  for (int i = 1; i < size; i++) {
       repr->append(to_string(numbers[i])).append(" ");
   }
   repr->append("]\n");
