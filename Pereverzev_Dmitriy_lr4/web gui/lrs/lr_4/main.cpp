@@ -29,7 +29,7 @@ int main(int argc, const char *argv[])
     cout << endl
          << bin_tree << endl;
 
-    width_4(tree);
+    width_4(tree, bypass_width);
 
     return 0;
 }

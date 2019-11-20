@@ -120,14 +120,14 @@ int add_4(TREE *&tree, int top, int *lvl, string *arr_val, int &index)
         {
             next_lvl = push_4(tree, top, lvl, arr_val, index);
             if (lvl_index == next_lvl && index != top)
-                next_lvl = push_4(tree, top, lvl, arr_val, index);
+                next_lvl = push_4(tree->right, top, lvl, arr_val, index);
         }
         else
             return lvl[index];
 
         if (next_lvl == lvl_index && index != top)
         {
-            next_lvl = push_4(tree, top, lvl, arr_val, index);
+            next_lvl = push_4(tree->right, top, lvl, arr_val, index);
         }
         else
             return lvl[index];

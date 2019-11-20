@@ -313,3 +313,18 @@ function bypass_width() {
     document.getElementById("bypass_width_str").value = bypass_width_str;
 
 }
+
+
+document.getElementById('file_in').addEventListener('change', readFile, false);
+
+function readFile(evt) {
+    var file = evt.target.files[0];
+    var reader = new FileReader();
+    reader.onload = (function (theFile) {
+        return function (e) {
+            var span = document.getElementById("tree_str");
+            span.value = e.target.result;
+        };
+    })(file);
+    reader.readAsText(file);
+}
