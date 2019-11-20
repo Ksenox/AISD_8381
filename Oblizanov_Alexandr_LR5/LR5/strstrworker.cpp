@@ -1,0 +1,105 @@
+#include "strstrworker.h"
+
+StrStrWorker::StrStrWorker()
+{
+    iter = 0;
+}
+
+QString StrStrWorker::getFromFile(QString fileName)
+{
+    ifstream fin(qPrintable(fileName), ios::in);
+    string out;
+    string temp;
+    while (true)
+    {
+        getline(fin, temp);
+        out += temp;
+        if (!fin.eof())
+            out += "\n";
+        else
+            break;
+    }
+    fin.close();
+    return QString::fromStdString(out);
+}
+
+QString StrStrWorker::createHashTable(QString input)
+{
+    hTable.setSize(SIZE);
+    hTable.clear();
+    QStringList pairs = input.split("\n");
+    QStringList temp;
+    QString output;
+    unsigned int iter = 0;
+    unsigned int sumIter = 0;
+    unsigned int maxIter = 0;
+    for (int i=0; i<pairs.length(); i++)
+    {
+        temp = pairs[i].split(" ");
+        if (temp.length() != 2)
+        {
+            output += "Error! Incorrect file content in line:\n\"";
+            output += pairs[i];
+            output += "\"";
+            return output;
+        }
+        iter = hTable.set(temp[0].toStdString(), temp[1].toStdString(), hFunc(temp[0].toStdString()));
+        //cout << hTable.print() << endl;
+        if (iter > maxIter)
+            maxIter = iter;
+        sumIter += iter;
+    }
+    output += "Table length:\t";
+    output += QString::number(hTable.getSize());
+    output += "\nNumber of items:\t";
+    output += QString::number(hTable.getItemCounter());
+    output += "\nAll inserts iterations:\t";
+    output += QString::number(sumIter);
+    output += "\nMax insert iterations:\t";
+    output += QString::number(maxIter);
+    output += "\n\n";
+    output += QString::fromStdString(hTable.print());
+    return output;
+}
+
+QString StrStrWorker::deleteElem(QString input)
+{
+    unsigned int iter = 0;
+    QString output;
+    string in = input.toStdString();
+    iter = hTable.remove(in, hFunc(in));
+    output += "Table length:\t";
+    output += QString::number(hTable.getSize());
+    output += "\nNumber of items:\t";
+    output += QString::number(hTable.getItemCounter());
+    if (iter == 0)
+    {
+        output += "\nError! No element in hash table";
+    }
+    else
+    {
+        output += "\nRemove iterations:\t";
+        output += QString::number(iter);
+    }
+    output += "\n\n";
+    output += QString::fromStdString(hTable.print());
+    return output;
+}
+
+unsigned int StrStrWorker::hFunc(string key)
+{
+    unsigned int result = 0;
+    for (unsigned int i=0; i<key.length(); i++)
+    {
+        result += static_cast<unsigned char>(key[i]);
+    }
+    result /= key.length();
+    return result;
+}
+
+void StrStrWorker::saveStrToFile(QString output, QString fileName)
+{
+    ofstream fout(qPrintable(fileName));
+    fout << qPrintable(output);
+    fout.close();
+}
