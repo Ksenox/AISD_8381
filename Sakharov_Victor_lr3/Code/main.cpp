@@ -5,6 +5,7 @@
 
 int main(int argc, char *argv[])
 {
+    cout << argc;
     if (argc > 1 && !strncmp(argv[1], "-c", 2)) //STUB
     {
         return utils_cli::exec(argc - 2, argv + 2);
