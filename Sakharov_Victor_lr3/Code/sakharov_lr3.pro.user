@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 4.8.1, 2019-11-14T03:43:44. -->
+<!-- Written by QtCreator 4.8.1, 2019-11-21T04:37:35. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -67,7 +67,7 @@
    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">Desktop Qt 5.12.1 MinGW 64-bit</value>
    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">Desktop Qt 5.12.1 MinGW 64-bit</value>
    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">qt.qt5.5121.win64_mingw73_kit</value>
-   <value type="int" key="ProjectExplorer.Target.ActiveBuildConfiguration">0</value>
+   <value type="int" key="ProjectExplorer.Target.ActiveBuildConfiguration">1</value>
    <value type="int" key="ProjectExplorer.Target.ActiveDeployConfiguration">0</value>
    <value type="int" key="ProjectExplorer.Target.ActiveRunConfiguration">0</value>
    <valuemap type="QVariantMap" key="ProjectExplorer.Target.BuildConfiguration.0">
@@ -308,7 +308,7 @@
     <value type="bool" key="RunConfiguration.UseQmlDebugger">false</value>
     <value type="bool" key="RunConfiguration.UseQmlDebuggerAuto">true</value>
     <value type="QString" key="RunConfiguration.WorkingDirectory"></value>
-    <value type="QString" key="RunConfiguration.WorkingDirectory.default">D:/Awork/Accel_2019/Eltech/Eltech2019/LvL3/Algorithms/Lr3/Sakharov/build-sakharov_lr3-Desktop_Qt_5_12_1_MinGW_64_bit-Debug</value>
+    <value type="QString" key="RunConfiguration.WorkingDirectory.default">D:/Awork/Accel_2019/Eltech/Eltech2019/LvL3/Algorithms/Lr3/Sakharov/build-sakharov_lr3-Desktop_Qt_5_12_1_MinGW_64_bit-Release</value>
    </valuemap>
    <value type="int" key="ProjectExplorer.Target.RunConfigurationCount">1</value>
   </valuemap>

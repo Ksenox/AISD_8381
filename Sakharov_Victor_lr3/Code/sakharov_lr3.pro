@@ -28,17 +28,19 @@ CONFIG += c++11
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
-    utils_cli.cpp \
-    utils_strandsort.cpp
+        utils_cli.cpp \
+        utils_strandsort.cpp \
+    model.cpp
 
 HEADERS += \
         mainwindow.h \
-    utils_cli.h \
-    utils_strandsort.h \
-    utils_list.h \
-    ilist.h \
-    utils_linked_list.h \
-    mainmodel.h
+        utils_cli.h \
+        utils_strandsort.h \
+        ilist.h \
+        utils_vector.h \
+        utils_linked.h \
+        model.h \
+        state.h
 
 FORMS += \
         mainwindow.ui

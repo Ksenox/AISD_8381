@@ -81,7 +81,11 @@
          </widget>
         </item>
         <item>
-         <widget class="QListWidget" name="List2"/>
+         <widget class="QListWidget" name="List2">
+          <property name="autoFillBackground">
+           <bool>false</bool>
+          </property>
+         </widget>
         </item>
        </layout>
       </item>
@@ -116,7 +120,7 @@
     <item>
      <layout class="QVBoxLayout" name="verticalLayout_2" stretch="0,0">
       <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_4" stretch="1,4">
+       <layout class="QHBoxLayout" name="horizontalLayout_4" stretch="1,4,0,0,0">
         <item>
          <widget class="QLabel" name="label_2">
           <property name="text">
@@ -145,7 +149,7 @@ font: 10pt &quot;Tahoma&quot;;
 padding: 2px;</string>
           </property>
           <property name="inputMethodHints">
-           <set>Qt::ImhMultiLine</set>
+           <set>Qt::ImhNone</set>
           </property>
           <property name="html">
            <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
@@ -153,6 +157,30 @@ padding: 2px;</string>
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Tahoma'; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="ProceedButon">
+          <property name="text">
+           <string>Input</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="RandomCount">
+          <property name="minimumSize">
+           <size>
+            <width>40</width>
+            <height>0</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="GenerateButton">
+          <property name="text">
+           <string>Generate data</string>
           </property>
          </widget>
         </item>
@@ -197,7 +225,7 @@ font: 10pt &quot;Tahoma&quot;;
 padding: 2px;</string>
           </property>
           <property name="inputMethodHints">
-           <set>Qt::ImhMultiLine</set>
+           <set>Qt::ImhNone</set>
           </property>
           <property name="html">
            <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
@@ -218,44 +246,23 @@ p, li { white-space: pre-wrap; }
     <item>
      <layout class="QHBoxLayout" name="horizontalLayout_2">
       <item>
-       <widget class="QPushButton" name="GenerateButton">
-        <property name="text">
-         <string>Generate data</string>
-        </property>
-       </widget>
-      </item>
-      <item>
        <widget class="QPushButton" name="ArrayListButton">
         <property name="text">
-         <string>Array list</string>
+         <string>Array List</string>
         </property>
        </widget>
       </item>
       <item>
        <widget class="QPushButton" name="LinkedListButton">
         <property name="text">
-         <string>Linked list</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="BackButton">
-        <property name="text">
-         <string>&lt;</string>
+         <string>Linked List</string>
         </property>
        </widget>
       </item>
       <item>
        <widget class="QPushButton" name="AutoButton">
         <property name="text">
-         <string>Auto</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="ForwardButton">
-        <property name="text">
-         <string>&gt;</string>
+         <string>Step</string>
         </property>
        </widget>
       </item>

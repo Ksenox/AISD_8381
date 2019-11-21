@@ -7,11 +7,13 @@
 #include <QString>
 #include <QListWidgetItem>
 #include <ctime>
-#include "mainmodel.h"
+#include "model.h"
 #include "ilist.h"
-#include "utils_list.h"
-#include "utils_linked_list.h"
-#include "utils_strandsort.h"
+
+#define M_CHECK if (mainmodel->busy) return; \
+                mainmodel->busy = true;
+
+#define M_UNLOCK mainmodel->busy = false;
 
 namespace Ui {
 class MainWindow;
@@ -24,25 +26,25 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-    void syncState();
 
 private slots:
     void on_GenerateButton_clicked();
+
+    void on_ProceedButon_clicked();
 
     void on_LinkedListButton_clicked();
 
     void on_ArrayListButton_clicked();
 
-    void on_BackButton_clicked();
-
     void on_AutoButton_clicked();
-
-    void on_ForwardButton_clicked();
 
     void on_SortButton_clicked();
 
 private:
-    mainmodel* model;
+    void syncState();
+    void syncListView(QListWidget* view, IList<int>& list);
+
+    logic_model* mainmodel;
     Ui::MainWindow *ui;
 
     QLabel *statusLabel;
