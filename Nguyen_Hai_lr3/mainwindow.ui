@@ -6,51 +6,68 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>636</width>
-    <height>647</height>
+    <width>645</width>
+    <height>631</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <widget class="QLabel" name="label_3">
+   <widget class="QTextEdit" name="textEdit">
     <property name="geometry">
      <rect>
-      <x>80</x>
-      <y>40</y>
-      <width>161</width>
-      <height>17</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Enter an integer string:</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_2">
-    <property name="geometry">
-     <rect>
-      <x>80</x>
-      <y>100</y>
-      <width>131</width>
-      <height>21</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Sort by selection :</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="pushButton">
-    <property name="geometry">
-     <rect>
-      <x>530</x>
-      <y>120</y>
-      <width>31</width>
+      <x>90</x>
+      <y>70</y>
+      <width>471</width>
       <height>31</height>
      </rect>
     </property>
+   </widget>
+   <widget class="QTextEdit" name="textEdit_2">
+    <property name="geometry">
+     <rect>
+      <x>90</x>
+      <y>220</y>
+      <width>471</width>
+      <height>31</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QTextEdit" name="textEdit_3">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>300</y>
+      <width>601</width>
+      <height>261</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="radioButton">
+    <property name="geometry">
+     <rect>
+      <x>110</x>
+      <y>140</y>
+      <width>112</width>
+      <height>23</height>
+     </rect>
+    </property>
     <property name="text">
-     <string>Run</string>
+     <string>Original</string>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="radioButton_2">
+    <property name="geometry">
+     <rect>
+      <x>110</x>
+      <y>170</y>
+      <width>401</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>With simultaneous selection of maximum and minimum</string>
     </property>
    </widget>
    <widget class="QLabel" name="label">
@@ -66,64 +83,50 @@
      <string>Selection Sort</string>
     </property>
    </widget>
-   <widget class="QRadioButton" name="radioButton">
+   <widget class="QPushButton" name="pushButton">
     <property name="geometry">
      <rect>
-      <x>120</x>
-      <y>120</y>
-      <width>112</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Original</string>
-    </property>
-   </widget>
-   <widget class="QTextEdit" name="textEdit">
-    <property name="geometry">
-     <rect>
-      <x>80</x>
-      <y>60</y>
-      <width>481</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="html">
-     <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Ubuntu'; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-    </property>
-   </widget>
-   <widget class="QRadioButton" name="radioButton_2">
-    <property name="geometry">
-     <rect>
-      <x>120</x>
+      <x>520</x>
       <y>140</y>
-      <width>421</width>
-      <height>23</height>
+      <width>41</width>
+      <height>41</height>
      </rect>
     </property>
     <property name="text">
-     <string>With simultaneous selection of maximum and minimum</string>
+     <string>Run</string>
     </property>
    </widget>
-   <widget class="QTextEdit" name="textEdit_2">
+   <widget class="QLabel" name="label_3">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>260</y>
-      <width>601</width>
-      <height>321</height>
+      <x>90</x>
+      <y>40</y>
+      <width>161</width>
+      <height>17</height>
      </rect>
+    </property>
+    <property name="text">
+     <string>Enter an integer string:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>90</x>
+      <y>110</y>
+      <width>131</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Sort by selection :</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_4">
     <property name="geometry">
      <rect>
-      <x>80</x>
-      <y>170</y>
+      <x>90</x>
+      <y>200</y>
       <width>67</width>
       <height>17</height>
      </rect>
@@ -132,21 +135,11 @@ p, li { white-space: pre-wrap; }
      <string>Result :</string>
     </property>
    </widget>
-   <widget class="QTextEdit" name="textEdit_3">
-    <property name="geometry">
-     <rect>
-      <x>80</x>
-      <y>190</y>
-      <width>481</width>
-      <height>31</height>
-     </rect>
-    </property>
-   </widget>
    <widget class="QLabel" name="label_5">
     <property name="geometry">
      <rect>
-      <x>80</x>
-      <y>230</y>
+      <x>90</x>
+      <y>270</y>
       <width>67</width>
       <height>17</height>
      </rect>
@@ -161,7 +154,7 @@ p, li { white-space: pre-wrap; }
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>636</width>
+     <width>645</width>
      <height>22</height>
     </rect>
    </property>

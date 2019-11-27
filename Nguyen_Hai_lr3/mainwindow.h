@@ -3,8 +3,8 @@
 
 #include <QMainWindow>
 #include <QString>
-#include <sort.h>
 #include <QMessageBox>
+#include <console.h>
 
 namespace Ui {
 class MainWindow;
@@ -17,13 +17,17 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-    SortSelection* cmp;
     bool flagCase_1 = false;
     bool flagCase_2 = false;
+    console *process;
+    string *result;
+    string *analize;
 
 private slots:
     void on_pushButton_clicked();
+
     void on_radioButton_clicked(bool checked);
+
 
     void on_radioButton_2_clicked(bool checked);
 

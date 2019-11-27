@@ -1,13 +1,14 @@
-#include "sort.h"
+#include "method.h"
 
 
-void SortSelection::swap(int &a, int &b) {
+void method::swap(int &a, int &b) {
    int temp;
    temp = a;
    a = b;
    b = temp;
 }
-void SortSelection::selectionSort_1(int *arr, int size, string *analize, string *result) {
+
+void method::selectionSort_1(int *arr, int size, string *analize, string *result) {
     int i,j, imin;
     analize->append("\n\n");
 
@@ -32,7 +33,7 @@ void SortSelection::selectionSort_1(int *arr, int size, string *analize, string 
     }
 }
 
-void SortSelection::selectionSort_2(int *arr, int size, string *analize, string *result) {
+void method::selectionSort_2(int *arr, int size, string *analize, string *result) {
     int i, j, imin, imax;
     analize->append("\n\n");
     for(i = 0; i<int((size+1)/2); i++) {

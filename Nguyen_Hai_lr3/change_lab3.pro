@@ -1,6 +1,6 @@
 #-------------------------------------------------
 #
-# Project created by QtCreator 2019-11-21T02:25:23
+# Project created by QtCreator 2019-11-24T01:07:55
 #
 #-------------------------------------------------
 
@@ -8,7 +8,7 @@ QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = Nguyen_Hai_lr3
+TARGET = change_lab3
 TEMPLATE = app
 
 # The following define makes your compiler emit warnings if you use
@@ -25,13 +25,15 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
+        console.cpp \
         main.cpp \
         mainwindow.cpp \
-        sort.cpp
+        method.cpp
 
 HEADERS += \
+        console.h \
         mainwindow.h \
-        sort.h
+        method.h
 
 FORMS += \
         mainwindow.ui

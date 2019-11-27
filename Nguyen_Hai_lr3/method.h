@@ -1,15 +1,16 @@
-#ifndef SORT_H
-#define SORT_H
+#ifndef METHOD_H
+#define METHOD_H
 #include <string>
-#include <QFileDialog>
+#include <QString>
 
 using namespace std;
-class SortSelection
+
+class method
 {
 public:
+    void swap(int &a, int &b);
     void selectionSort_1(int *arr, int size, string *analize, string *result);
     void selectionSort_2(int *arr, int size, string *analize, string *result);
-    void swap(int &a, int &b);
 };
 
-#endif // SORT_H
+#endif // METHOD_H
