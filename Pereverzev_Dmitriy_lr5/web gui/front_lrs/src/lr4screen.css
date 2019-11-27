@@ -1,0 +1,60 @@
+* {
+  font-family: sans-serif
+}
+
+body {
+  margin: 0
+}
+
+.form {
+  width: 60%;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: start;
+  margin-left: 8%;
+}
+
+.FormLabel::after {
+  content: ':'
+}
+
+.form>* {
+  margin: 1%;
+}
+
+.form_2 {
+  float: left;
+  margin-left: 5%;
+  align-items: center;
+  text-align: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: start;
+}
+
+.form_2>* {
+  margin: 10px;
+}
+
+/*график*/
+.node {
+  cursor: pointer;
+}
+
+.node circle {
+  fill: #fff;
+  stroke: steelblue;
+  stroke-width: 3px;
+}
+
+.node text {
+  font: 12px sans-serif;
+}
+
+.link {
+  fill: none;
+  stroke: #ccc;
+  stroke-width: 2px;
+}

@@ -1,0 +1,45 @@
+* {
+  font-family: sans-serif
+}
+
+body {
+  margin: 0
+}
+
+.form {
+  width: 60%;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: start;
+  margin-left: 9%;
+}
+
+.FormLabel::after {}
+
+.form>* {
+  margin: 1%;
+}
+
+
+/*график*/
+.node {
+  cursor: pointer;
+}
+
+.node circle {
+  fill: #fff;
+  stroke: steelblue;
+  stroke-width: 3px;
+}
+
+.node text {
+  font: 12px sans-serif;
+}
+
+.link {
+  fill: none;
+  stroke: #ccc;
+  stroke-width: 2px;
+}

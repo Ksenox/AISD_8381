@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="../src/lr5screen.css">
+
+</head>
+
+<body style="padding : 20px">
+    <div class="form" style="float: left">
+        <div style="width: 48%;text-align: center;">
+            <label class="FormLabel" for="tree">Введите значения, которые нужно записать в БДП </label><br>
+            <textarea id=string_of_elem name=" str" cols="30" rows="2" style="width: 47%">Введите значения</textarea>
+            <br>
+            <input type="file" id="file_in" accept=".txt"></input>
+        </div>
+
+        <div style="width: 48%;text-align: center;">
+            <label class="FormLabel" for="tree">Какой элемент найти и удалить?</label>
+            <textarea id="find_elem" name="str" cols="30" rows="2" style="width: 47%">Введите значение</textarea>
+        </div>
+
+        <hr width="100%">
+
+        <button id=button_test style="width: 100%" onclick=take_tree_str()>DATA VALIDATION!</button>
+
+        <hr width="100%" style="height: 1px ">
+
+        <button id=button_tree style="width: 48%" onclick=take_tree()>BUILD TREE</button>
+        <button id=button_find style="width: 48%" onclick='find_and_del(document.getElementById("find_elem").value)'>FIND
+            ELEM</button>
+        <p>Результат:</p>
+        <br>
+        <div id="div_tree"></div>
+    </div>
+
+    <script src="../src/d3.min.js"> </script>
+    <script src="../src/lr_5_script.js"></script>
+
+</body>
+
+</html>
