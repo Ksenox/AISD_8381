@@ -95,6 +95,8 @@ void MainWindow::highlightCurrNode(lrstruct::Node* currNode, int mode) {
 
 void MainWindow::onRunButtonClicked() {
     qDebug() << "onRunButtonClicked();" << endl;
+    isBstTree->setText("-");
+    isBinHeap->setText("-");
     mainGraphicsScene->clear();
     std::string readingStr;
     QString tempInp = inputLine->text();
