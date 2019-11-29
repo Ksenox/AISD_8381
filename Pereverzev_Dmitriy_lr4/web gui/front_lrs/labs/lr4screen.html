@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="../src/lr4screen.css">
+
+</head>
+
+<body style="padding : 20px">
+    <div class="form" style="float: left">
+        <div style="width: 47%;text-align: center;">
+            <label class="FormLabel" for="tree">Введите скобочную запись леса</label><br>
+            <textarea id="tree_str" name=" str" cols="30" rows="2" style="width: 47%">(1(2(3(4(5(6(7(8(9(10)(23))))(19(20(24)(21)))))(18)))(11(12(13(14(16))(15(17(20))))))))(1(2(3)(567)))(gfdhgfjkhglkh;glfjghjfkgjk)</textarea>
+            <br>
+            <input type="file" id="file_in" accept=".txt"></input>
+        </div>
+
+        <div style="width: 48%;text-align: center;margin-bottom: 30px">
+            <label class="FormLabel" for="tree">Скобочная запись бинарного дерева</label>
+            <textarea id="bin_tree_str" name="str" cols="30" rows="2" style="width: 47%">Нажми на кнопку ниже</textarea>
+        </div>
+
+        <hr width="100%">
+
+        <button id=button_test style="width: 48%" onclick="take_tree(obj, treeData)">DATA VALIDATION!</button>
+        <button id=button_take_bin_str style="width: 48%" onclick="take_bin_tree()">TAKE BIN TREE STRING</button>
+
+        <hr width="100%" style="height: 1px ">
+
+        <button id=button_forest style="width: 48%" onclick="build_graph(obj);forest_or_bin=true;">BUILD FOREST</button>
+        <button id=button_bin_tree style="width: 48%" onclick="build_graph(obj_bin);forest_or_bin=false;">BUILD BIN
+            TREE</button>
+        <br>
+        <p>Результат:</p>
+        <br>
+        <div id="div_tree"></div>
+    </div>
+    <div class="form_2">
+        <div>
+            <label for="tree">Элементы дерева в горизонтальном порядке</label><br>
+            <textarea id="bypass_width_str" name="str" cols="30" rows="2"></textarea>
+        </div>
+        <hr width="100%" style="margin-top: 40px">
+        <button id=button_bypass_width style="width: 100%" onclick="bypass_width()">BYPASS WIDTH</button>
+
+
+
+    </div>
+    <div id="div_tree"></div>
+
+    <script src="../src/d3.min.js"> </script>
+    <script src="../src/lr_4_script.js"></script>
+
+</body>
+
+</html>
