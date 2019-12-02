@@ -151,15 +151,17 @@ int count;
 void addon_build_tree_5(const FunctionCallbackInfo<Value> &args)
 {
     Isolate *isolate = args.GetIsolate();
-    int value;
-    int count_local = count;
+    Local<String> arg0 = Local<String>::Cast(args[0]);
+    Local<Number> arg1 = Local<Number>::Cast(args[1]);
+    String::Utf8Value expr(arg0);
     string tree_str = "(";
-    string input = input_string;
-
+    string value;
+    int count = (int)(arg1->NumberValue());
+    string input = string(*expr);
     istringstream in(input);
     tree_5 = NULL;
 
-    for (; count_local >= 0; count_local--)
+    for (; count > 0; count--)
     {
         in >> value;
         push_5(tree_5, value);
@@ -179,7 +181,7 @@ void addon_find_and_del_5(const FunctionCallbackInfo<Value> &args)
     string input = string(*expr);
     istringstream in(input);
 
-    int value;
+    string value;
     in >> value;
 
     if (find_elem_5(tree_5, value) != NULL)
@@ -203,7 +205,8 @@ void addon_test_5(const FunctionCallbackInfo<Value> &args)
     Local<Number> arg1 = Local<Number>::Cast(args[1]);
     String::Utf8Value expr(arg0);
     input_string = "";
-    int ret = test_5(string(*expr));
+    //int ret = test_5(string(*expr));
+    int ret = 0;
     if (!ret)
     {
         count = (int)(arg1->NumberValue());
@@ -211,6 +214,7 @@ void addon_test_5(const FunctionCallbackInfo<Value> &args)
     }
 
     Local<Number> RET = Number::New(isolate, ret);
+
     args.GetReturnValue().Set(RET);
 }
 

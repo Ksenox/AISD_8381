@@ -12,30 +12,33 @@
 
 <body style="padding : 20px">
     <div class="form" style="float: left">
-        <div style="width: 48%;text-align: center;">
-            <label class="FormLabel" for="tree">Введите значения, которые нужно записать в БДП </label><br>
-            <textarea id=string_of_elem name=" str" cols="30" rows="2" style="width: 47%">Введите значения</textarea>
-            <br>
-            <input type="file" id="file_in" accept=".txt"></input>
+        <div style="width: 100%;text-align: center;">
+            <label class="FormLabel" for="tree" style="width: 47%;float: left">Какие значения нужно записать
+                в БДП?</label>
+            <label class="FormLabel" for="tree" style="width: 47%;float: right">Какой элемент найти и удалить?</label>
         </div>
 
-        <div style="width: 48%;text-align: center;">
-            <label class="FormLabel" for="tree">Какой элемент найти и удалить?</label>
-            <textarea id="find_elem" name="str" cols="30" rows="2" style="width: 47%">Введите значение</textarea>
+        <div style="width: 100%;text-align: center;">
+            <textarea id=string_of_elem name=" str" cols="30" rows="2" style="width: 47%;float: left" placeholder="Введите значения"></textarea>
+            <textarea id="find_elem" name="str" cols="30" rows="2" style="width: 47%;float: right" placeholder="Введите значениe"></textarea>
         </div>
-
+        <input type="file" id="file_in" accept=".txt"></input>
+        <!--
         <hr width="100%">
 
         <button id=button_test style="width: 100%" onclick=take_tree_str()>DATA VALIDATION!</button>
+        -->
+        <hr width="100%">
 
-        <hr width="100%" style="height: 1px ">
-
-        <button id=button_tree style="width: 48%" onclick=take_tree()>BUILD TREE</button>
-        <button id=button_find style="width: 48%" onclick='find_and_del(document.getElementById("find_elem").value)'>FIND
+        <button id=button_build style="width: 48%" onclick=all_steps()>BUILD TREE</button>
+        <button id=button_find style="width: 48%" onclick='find_and_del(document.getElementById("find_elem").value)'>DELETE
             ELEM</button>
-        <p>Результат:</p>
+
+        <hr width="100%">
+        <button id=button_step style="width: 48%" onclick=step()>STEP UP</button>
+        <button id=button_align style="width: 48%" onclick=align()>ALIGN</button>
         <br>
-        <div id="div_tree"></div>
+        <div id="div_tree" style="width: 20%"></div>
     </div>
 
     <script src="../src/d3.min.js"> </script>

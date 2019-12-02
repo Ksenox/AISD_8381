@@ -1,12 +1,12 @@
 #include "lr_5_methods.h"
 struct TREE_5
 {
-    int value;
+    string value;
     TREE_5 *left;
     TREE_5 *right;
 };
 
-void push_5(TREE_5 *&tree, int value)
+void push_5(TREE_5 *&tree, string value)
 {
     if (tree == NULL)
     {
@@ -18,16 +18,17 @@ void push_5(TREE_5 *&tree, int value)
     }
     else
     {
-        if (tree->value < value)
+
+        if (strcmp(tree->value.c_str(), value.c_str()) < 0)
             push_5(tree->right, value);
-        else if (tree->value > value)
+        else if (strcmp(tree->value.c_str(), value.c_str()) > 0)
             push_5(tree->left, value);
     }
 
     return;
 }
 
-void del_elem_5(TREE_5 *&tree, int value)
+void del_elem_5(TREE_5 *&tree, string value)
 {
     TREE_5 **buffer;
     if (tree->left)
@@ -41,7 +42,7 @@ void del_elem_5(TREE_5 *&tree, int value)
     del_help_5(buffer, value);
 }
 
-void del_help_5(TREE_5 **buffer, int value)
+void del_help_5(TREE_5 **buffer, string value)
 {
     if ((*buffer)->left == NULL && (*buffer)->right == NULL)
     {
@@ -70,29 +71,30 @@ void del_help_5(TREE_5 **buffer, int value)
         else
         {
 
-            TREE_5 *&to_left = (*buffer)->right;
-            while (to_left->left->left != NULL)
-                to_left = to_left->left;
+            TREE_5 **to_left = &((*buffer)->right);
+            while ((*to_left)->left->left != NULL)
+                to_left = &((*to_left)->left);
             // _1
-            TREE_5 *help = to_left->left->right;
+            TREE_5 *help = (*to_left)->left->right;
             // _2
-            to_left->left->left = (*buffer)->left;
-            to_left->left->right = (*buffer)->right;
-            (*buffer) = to_left->left;
-            to_left->left = help;
+            (*to_left)->left->left = (*buffer)->left;
+            (*to_left)->left->right = (*buffer)->right;
+            (*buffer) = (*to_left)->left;
+            (*to_left)->left = help;
         }
         return;
     }
 }
 
-TREE_5 *&find_elem_5(TREE_5 *&tree, int value)
+TREE_5 *&find_elem_5(TREE_5 *&tree, string value)
 {
     TREE_5 *exist = NULL;
     if (tree != NULL)
     {
-        if (tree->value < value)
+
+        if (strcmp(tree->value.c_str(), value.c_str()) < 0)
             exist = find_elem_5(tree->right, value);
-        else if (tree->value > value)
+        else if (strcmp(tree->value.c_str(), value.c_str()) > 0)
             exist = find_elem_5(tree->left, value);
         else if (tree->value == value)
         {
@@ -112,36 +114,24 @@ TREE_5 *&find_elem_5(TREE_5 *&tree, int value)
 
 void bypass_5(TREE_5 *&tree, string &bin_str)
 {
-    cout << tree->value;
-    bin_str += to_string(tree->value);
+    bin_str += tree->value;
     if (tree->left)
     {
-        cout << '(';
         bin_str += "(";
         bypass_5(tree->left, bin_str);
     }
 
     if (tree->right)
     {
-        cout << '(';
         bin_str += "(";
         bypass_5(tree->right, bin_str);
     }
-    cout << ')';
     bin_str += ")";
 }
 
 int test_5(string str)
 {
-    if (!isdigit(str[0]))
-        return 1;
-    for (int i = 1; i < str.length(); i++)
-    {
-        if (!isdigit(str[i]) && str[i] != ' ')
-            return 2;
-        if (str[i - 1] == ' ' && str[i] == ' ')
-            return 3;
-        }
+
     return 0;
 }
 //8 9 11 15 19 20 21 7 3 2 1 5 6 4 13 14 10 12 17 16 18

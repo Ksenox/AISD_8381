@@ -15,11 +15,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 
-//connect to port 3000
-app.listen(3000, function () {
-    console.log('Serever startd on port 3000!');
-});
-
 //MAIN PAGE
 app.get('/', function (req, res) {
     res.send(index.html);
@@ -74,7 +69,7 @@ app.post('/lr_4_tree', function (req, res) {
             res.end(file_data);
         });
 
-        
+
 
     }
     if (body.err == 'test') {
@@ -113,8 +108,8 @@ app.post('/lr_5_tree', function (req, res) {
         var string_tree = lrs.find_and_del_5(body.elem_for_del);
         res.end(string_tree);
     }
-    if (body.build == "go") {
-        var string_tree = lrs.build_tree_5();
+    if (body.build) {
+        var string_tree = lrs.build_tree_5(body.build, body.build.split(' ').length - 1);
         res.end(string_tree);
     }
 
@@ -122,7 +117,12 @@ app.post('/lr_5_tree', function (req, res) {
 
 });
 
+//connect to port 3000
+app.listen(3000, function () {
+    console.log('Serever startd on port 3000!');
+});
 
 
 
 
+//end
