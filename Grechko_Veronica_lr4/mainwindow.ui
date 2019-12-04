@@ -34,6 +34,13 @@
        </property>
       </widget>
      </item>
+     <item>
+      <widget class="QPushButton" name="on_file">
+       <property name="text">
+        <string>Из файла</string>
+       </property>
+      </widget>
+     </item>
     </layout>
    </widget>
    <widget class="QWidget" name="gridLayoutWidget">

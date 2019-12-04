@@ -23,6 +23,8 @@ private slots:
 
     void on_onLeavesonLevel_clicked();
 
+    void on_on_file_clicked();
+
 private:
     Ui::MainWindow *ui;
     QGraphicsScene *scene;

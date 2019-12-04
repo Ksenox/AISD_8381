@@ -69,3 +69,39 @@ void MainWindow::on_onLeavesonLevel_clicked()
     ui->label->setText(out);
 
 }
+
+void MainWindow::on_on_file_clicked()
+{
+    QString file_name = QFileDialog().getOpenFileName();
+        if(!file_name.isNull()){
+            QFile file(file_name);
+            if(file.open(file.ReadOnly)){
+                QString data  = file.readAll();
+                QString input = delSpace(data);
+                 if (input == "") {
+                     QMessageBox::critical(this, "Error!", "Введите дерево");
+                     return;
+                 }
+                 else{
+                     if (input[0] != '(' || input[input.size() - 1] != ')'){
+                         QMessageBox::critical(this, "Error!", "Дерево введенно некорректно");
+                         return;
+                     }
+                     else{
+
+                          BinTree* BT = new  (BinTree);
+                          BT->Head = BT->createTree(mySplit(input));
+                          QString out;
+                          out.append("Глубина дерева: ");
+
+                          int depth = BT->max_depth(BT->Head);
+                          out.append(QString::number(depth - 1));
+                          ui->label->setText(out);
+                          graphic(BT, scene,depth);
+                     }
+                 }
+
+            }
+        }
+        else QMessageBox::warning(this,"Error", "Not Found");
+}

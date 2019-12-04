@@ -4,6 +4,8 @@
 #include <QGraphicsView>
 #include <QGraphicsEffect>
 #include <QString>
+#include <QFileDialog>
+#include <QMessageBox>
 
 typedef QString type;
 
@@ -30,7 +32,7 @@ public:
 };
 
 QGraphicsScene *graphic(BinTree *tree, QGraphicsScene *&scene, int depth);
-int treePainter(QGraphicsScene *&scene, Node *node, int w, int h, int wDelta, int hDelta, QPen &pen, QBrush &brush, QFont &font, int depth);
+int treePainter(QGraphicsScene *&scene, Node *node, int w, int h, int wDelta, int hDelta, QPen &pen, QBrush &brush, QFont &font, int depth, int c);
 
 
 

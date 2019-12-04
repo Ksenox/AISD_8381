@@ -102,7 +102,9 @@ QGraphicsScene *graphic(BinTree *tree, QGraphicsScene *&scene, int depth)
     QPen pen;
     QColor color;
     color.setRgb(220, 220, 220);
+    int color_c = 220;
     pen.setColor(color);
+    color.setRgb(220, 220, 220);
     QBrush brush (color);
     QFont font;
     font.setFamily("Tahoma");
@@ -112,16 +114,19 @@ QGraphicsScene *graphic(BinTree *tree, QGraphicsScene *&scene, int depth)
     int wDelta = 15;
     font.setPointSize(wDelta);
     int width = (wDelta*wDeep)/2;
-    treePainter(scene, tree->Head, width/2, hDelta, wDelta, hDelta, pen, brush, font, wDeep);
+    treePainter(scene, tree->Head, width/2, hDelta, wDelta, hDelta, pen, brush, font, wDeep, color_c);
     return scene;
 }
 
-int treePainter(QGraphicsScene *&scene, Node *node, int w, int h, int wDelta, int hDelta, QPen &pen, QBrush &brush, QFont &font, int depth)
+int treePainter(QGraphicsScene *&scene, Node *node, int w, int h, int wDelta, int hDelta, QPen &pen, QBrush &brush, QFont &font, int depth, int color_c)
 {
     if ((node == nullptr) || (node->data == '^'))
         return 0;
     QString out;
     out += node->data;
+    QColor color;
+    color.setRgb(color_c, color_c, color_c);
+    pen.setColor(color);
     QGraphicsTextItem *textItem = new QGraphicsTextItem;
     textItem->setPos(w, h);
     textItem->setPlainText(out);
@@ -132,8 +137,8 @@ int treePainter(QGraphicsScene *&scene, Node *node, int w, int h, int wDelta, in
     if (node->right != nullptr)
         scene->addLine(w+wDelta/2, h+wDelta, w+(depth/2)*wDelta+wDelta/2, h+hDelta+wDelta, pen);
     scene->addItem(textItem);
-    treePainter(scene, node->left, w-(depth/2)*wDelta, h+hDelta, wDelta, hDelta, pen, brush, font, depth/2);
-    treePainter(scene, node->right, w+(depth/2)*wDelta, h+hDelta, wDelta, hDelta, pen, brush, font, depth/2);
+    treePainter(scene, node->left, w-(depth/2)*wDelta, h+hDelta, wDelta, hDelta, pen, brush, font, depth/2, color_c - 30);
+    treePainter(scene, node->right, w+(depth/2)*wDelta, h+hDelta, wDelta, hDelta, pen, brush, font, depth/2, color_c- 50);
     return 0;
 }
 
