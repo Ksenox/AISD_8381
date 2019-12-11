@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>GRAPH</title>
+  <link rel="stylesheet" href="../src/cw_graph_screen.css">
+  <link rel="stylesheet" href="../src/bts.css">
+
+</head>
+
+<body>
+  <div class="card-header">
+    <ul class="nav nav-tabs card-header-tabs">
+      <li class="nav-item">
+        <a class="nav-link" href="/">Main page</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/cw_tree">Tree</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/cw_table">Table</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/cw_graph">Graphs</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link active" href="">Graph without turns</a>
+      </li>
+    </ul>
+  </div>
+
+
+  <div style="height:400px" id="my_dataviz"></div>
+
+  <button class="btn btn1" id="update_table" style="width: 96%; margin: 2%" onclick="rebuild(1);">REBUILD</button>
+  <hr>
+
+  <center class="container">
+    <div class="row">
+      <div class="col-md">
+        <button class="btn btn3" id="update_table_2" onclick="take_data('average_case')">UPDATE</button>
+        <label>Average_case<span style="color: rgb(67, 136, 96);">*</span></label>
+
+        <br>
+        <table class="tb_1 table table-hover ">
+          <thead>
+            <tr>
+              <td scope="col">#</td>
+              <td scope="col">Quantity of tests</td>
+              <td scope="col">Quantity of leafs</td>
+              <td scope="col">Рrocessing time</td>
+            </tr>
+          </thead>
+          <tbody id=table_body_2>
+            <tr id="row_1">
+              <td>1</td>
+              <td>0</td>
+              <td>0</td>
+              <td>000</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="col-md">
+        <button class="btn btn2" id="update_table_2" onclick="take_data('worst_case')">UPDATE</button>
+        <label>Worst_case<span style="color: rgb(223, 151, 19);">*</span></label>
+        <br>
+        <table class="tb_1 table table-hover ">
+          <thead>
+            <tr>
+              <td>#</td>
+              <td scope="col">Quantity of tests</td>
+              <td scope="col">Quantity of leafs</td>
+              <td scope="col">Рrocessing time</td>
+            </tr>
+          </thead>
+          <tbody id=table_body_3>
+            <tr id="row_1">
+              <td>1</td>
+              <td>0</td>
+              <td>0</td>
+              <td> 000</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </center>
+
+  <br>
+</body>
+<script src="../src/d3.v4.js"></script>
+<script src="../src/d3-scale-chromatic.v1.min.js"></script>
+<script src="../src/cw_graph_dop_script.js"></script>
+</html>

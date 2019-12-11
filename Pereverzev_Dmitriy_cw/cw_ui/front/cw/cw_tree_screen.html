@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="../src/cw_tree_screen.css">
+    <link rel="stylesheet" href="../src/bts.css">
+</head>
+
+<body>
+    <div class="card-header">
+        <ul class="nav nav-tabs card-header-tabs">
+            <li class="nav-item">
+                <a class="nav-link" href="/">Main page</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="">Tree</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/cw_table">Table</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/cw_graph">Graphs</a>
+            </li>
+        </ul>
+    </div>
+    <div class="form" style="float: left">
+        <div style="width: 100%;text-align: center;">
+            <label class="FormLabel" for="tree" style="width: 47%;">Enter the data you want to add to the tree</label>
+        </div>
+
+        <div style="width: 100%;text-align: center;">
+            <textarea class="ta" id=string_of_elem name=" str" cols="30" rows="2" placeholder="Enter data"></textarea>
+        </div>
+        <div class="custom-file">
+            <input type="file" class="custom-file-input" id="file_in" accept=".txt">
+            <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+        </div>
+        <hr width="100%">
+
+        <button id=button_build onclick=all_steps() class="btn btn2">BUILD TREE</button>
+        <button id=button_step onclick=step() class="btn btn3">STEP UP</button>
+        <hr width="100%">
+
+
+    </div>
+    <div id="div_tree" style="width: 5%"></div>
+
+
+
+</body>
+<script src="../src/d3.min.js"> </script>
+<script src="../src/cw_tree_script.js"></script>
+
+</html>
