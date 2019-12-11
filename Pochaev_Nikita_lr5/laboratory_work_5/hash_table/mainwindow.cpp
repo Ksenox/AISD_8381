@@ -4,6 +4,7 @@
 #include "customvector.h"
 
 #include "test.h"
+#include "HashTable.h"
 
 MainWindow::MainWindow(QWidget *parent) :
         QMainWindow(parent),
@@ -14,22 +15,25 @@ MainWindow::MainWindow(QWidget *parent) :
         fileWay(new QLabel),
         findElInput(new QtMaterialTextField),
         findEl(new QtMaterialFlatButton),
+        stepByStepSwitcher(new QtMaterialCheckBox),
+        nextStep(new QtMaterialFlatButton),
 
-        mainTextOutput(new QTextEdit)
-{
-    setUpUI();
-}
+        mainTextOutput(new QTextEdit),
+        workTable(new lrstruct::HashTable<std::string>)
+        {
+            setUpUI();
+        }
 
 MainWindow::~MainWindow() {
     delete ui;
 }
 
-void MainWindow::onFileOpenButtonClicked() {    
+void MainWindow::onFileOpenButtonClicked() {
     qDebug() << "onFileOpenlicked();" << endl;
 
-    // find element function activate
-    findElInput->setDisabled(false);
-    findEl->setDisabled(false);
+    std::fstream fs;
+    fs.open(LOG_FILE_WAY, std::ios::out | std::ios::trunc);
+    fs.close();
 
     fileWay->clear();
 
@@ -52,6 +56,16 @@ void MainWindow::onFileOpenButtonClicked() {
 
     fileWay->setText(fileName);
 
+    // working function activate
+    findElInput->setDisabled(false);
+    findEl->setDisabled(false);
+    runButton->setDisabled(false);
+    stepByStepSwitcher->setDisabled(false);
+
+    connect(stepByStepSwitcher, SIGNAL(toggled(bool)), this, SLOT(changeNextStepButState()));
+    connect(nextStep, SIGNAL(clicked()), workTable, SLOT(disableLoopLatency()));
+    connect(workTable, SIGNAL(printOutput()), this, SLOT(outputInfo()));
+
     file.close();
 
     qDebug() << "End of onFileOpenlicked()" << endl;
@@ -72,11 +86,8 @@ void MainWindow::onRunButtonClicked() {
     }
 
     Test::makeHashTable(inputStr, workTable);
-    QFile file(LOG_FILE_WAY);
-    file.open(QFile::ReadOnly);
-    QString content = QString::fromUtf8(file.readAll());
-    mainTextOutput->setPlainText(content);
-    file.close();
+
+    outputInfo();
 }
 
 void MainWindow::onFindElButtonClicked() {
@@ -86,9 +97,11 @@ void MainWindow::onFindElButtonClicked() {
     std::string elFind = findElInput->text().toUtf8().constData();
 
     Test::findElement(workTable, elFind);
-    Test::makeHashTable(inputStr, workTable);
 
-    mainTextOutput->clear();
+    outputInfo();
+}
+
+void MainWindow::outputInfo() {
     QFile file(LOG_FILE_WAY);
     file.open(QFile::ReadOnly);
     QString content = QString::fromUtf8(file.readAll());

@@ -21,7 +21,7 @@ lrstruct::Vector<std::string> convertStrToWords(std::string str) {
     return res;
 }
 
-void Test::makeHashTable(lrstruct::Vector<std::string> inpStrs, lrstruct::HashTable<std::string> &workTable) {
+void Test::makeHashTable(lrstruct::Vector<std::string> inpStrs, lrstruct::HashTable<std::string> *workTable) {
     /*
      * FIXME: out of range error
     for(auto const& value: inpStrs) {
@@ -30,26 +30,28 @@ void Test::makeHashTable(lrstruct::Vector<std::string> inpStrs, lrstruct::HashTa
     */
 
     for(size_t i = 0; i < inpStrs.size(); i++) {
-        workTable.insert(inpStrs.at(static_cast<int>(i)));
+        workTable->insert(inpStrs.at(static_cast<int>(i)));
     }
 
-    std::fstream fs;
-    fs.open (LOG_FILE_WAY, std::fstream::in | std::fstream::out | std::fstream::app);
-
-    workTable.dump(fs);
-    fs.close();
+    workTable->dump(LOG_FILE_WAY);
 }
 
-void Test::findElement(lrstruct::HashTable<std::string> &workTable, std::string elFind) {
+void Test::findElement(lrstruct::HashTable<std::string> *workTable, std::string elFind) {
     std::fstream fs;
+    QMessageBox msgBox;
+    msgBox.setWindowTitle("Element searching");
     fs.open (LOG_FILE_WAY, std::fstream::in | std::fstream::out | std::fstream::app);
-    bool isElExists = workTable.findOrInsert(elFind);
+    bool isElExists = workTable->findOrInsert(elFind);
     if(isElExists) {
         fs << "\nFinding element exists in Hash Table!\n";
+        msgBox.setText("Finding element exists in Hash Table!");
+        msgBox.exec();
     } else {
         fs << "\nFinding element doesn't exist in Hash Table!\n";
-        workTable.insert(elFind);
+        workTable->insert(elFind);
         fs << "It was added\n";
+        msgBox.setText("Finding element doesn't exist in Hash Table!\nIt was added.");
+        msgBox.exec();
     }
     fs.close();
 }

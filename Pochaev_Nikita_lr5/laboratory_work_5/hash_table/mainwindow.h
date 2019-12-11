@@ -19,21 +19,19 @@
 
 namespace Ui { class MainWindow; }
 
-class MainWindow : public QMainWindow
-{
+class MainWindow : public QMainWindow {
     Q_OBJECT
 
 public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
-    // STATE FLAGS
-    bool checkType = true;  // default is BST check
-
 public slots:
     void onRunButtonClicked();
     void onFileOpenButtonClicked();
     void onFindElButtonClicked();
+    void changeNextStepButState();
+    void outputInfo();
 
 private:
     void setUpUI();
@@ -46,11 +44,13 @@ private:
     QLabel *fileWay;
     QtMaterialTextField *findElInput;
     QtMaterialFlatButton *findEl;
+    QtMaterialCheckBox *stepByStepSwitcher;
+    QtMaterialFlatButton *nextStep;
 
     QTextEdit *mainTextOutput;
     lrstruct::Vector<std::string> inputStr;
 
-    lrstruct::HashTable<std::string> workTable;
+    lrstruct::HashTable<std::string> *workTable;
 };
 
 #endif // MAINWINDOW_H

@@ -8,8 +8,8 @@
 class Test {
 
     public:
-        static void makeHashTable(lrstruct::Vector<std::string>, lrstruct::HashTable<std::string>&);
-        static void findElement(lrstruct::HashTable<std::string>&, std::string);
+        static void makeHashTable(lrstruct::Vector<std::string>, lrstruct::HashTable<std::string>*);
+        static void findElement(lrstruct::HashTable<std::string>*, std::string);
 };
 
 #endif // TEST_H

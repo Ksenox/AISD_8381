@@ -18,7 +18,6 @@
 #include <cstdio>
 #include <cassert>
 #include <regex>
-#include <experimental/filesystem>
 #include <cmath>
 #include <unistd.h>
 #include <iostream>
@@ -28,6 +27,7 @@
 #include <stdexcept>
 #include <functional>
 #include <sstream>
+#include <type_traits>
 
 #include <QObject>
 #include <QMessageBox>

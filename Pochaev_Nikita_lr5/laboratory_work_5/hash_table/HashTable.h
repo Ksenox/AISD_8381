@@ -3,16 +3,24 @@
 
 #include "allheaders.h"
 #include "customvector.h"
+#include "structLogger.h"
 
-#define DEBUG 0
-#define FILE_LOG 1
+#define DEBUG 1
 
 namespace lrstruct {
-    template <typename Key, size_t N = 7/* implementation-defined */>
-    class HashTable {
+    template <typename Key>
+    class HashTable : public StructLogger {
 
     public:
         /* ----- CONTAINER FIELDS ----- */
+
+        /**
+         * There are two arguments from the readability perspective
+         * to prefer using over typedef. First, using comes first when used.
+         * Second, using feels quite similar to auto.
+         * Additionally, using can easily be used for template aliases.
+         */
+
         class Iterator;
 
         // using is to call variable from class namespace without ::
@@ -43,6 +51,7 @@ namespace lrstruct {
         using hasher = std::hash<key_type>;
 
     private:
+        size_t hashKeySize = 7;
         /**
          * @brief The Node struct
          * for B+-Tree.
@@ -57,7 +66,7 @@ namespace lrstruct {
             }
         };
         Node *table = nullptr;
-        size_type maxSize{N};
+        size_type maxSize{hashKeySize};
         size_type cSize{0};            // current Hash Table size
 
         /**
@@ -107,37 +116,30 @@ namespace lrstruct {
             cSize = 0;
 
             table = new Node[maxSize];
+
             /*
-             * FIXME: for test with more then 71 element
+             * FIXME: for test with more then 71 element (rehashing happening)
              * it falls. Why??
             for (const auto &fromBuff : dataBuff)
                 insert_unchecked(fromBuff);
             */
+
             for (int i = 0; i < static_cast<int>(dataBuff.size()); i++) {
                 insert_unchecked(dataBuff[i]);
             }
             if(DEBUG) qDebug() << "table rehashed!" << endl;
-            if(FILE_LOG) {
-                std::fstream fs;
-                fs.open (LOG_FILE_WAY, std::fstream::in | std::fstream::out | std::fstream::app);
-                fs << "\nTable rehashed!\n";
-                fs << "New max size of hash is: " << maxSize << ", current size is: " << cSize << "\n\n";
-                fs.close();
-            }
+            if(getLogMode()) makeLogMessage("Table rehashed!", maxSize, cSize);
+            if(getStepByStepMode() && getLogMode()) loopLatency();
         }
 
     public:
 
         /* ----- CONSTRUCTORS ----- */
 
-        HashTable() : table(new Node[N]) {
+        HashTable() : table(new Node[hashKeySize]) {
             if(DEBUG) qDebug() << "DEFAULT_CONSTRUCTOR" << endl;
-            if(FILE_LOG) {
-                std::fstream fs;
-                fs.open (LOG_FILE_WAY, std::fstream::in | std::fstream::out | std::fstream::app);
-                fs << "DEFAULT_CONSTRUCTOR\n";
-                fs.close();
-            }
+            if(getLogMode()) makeLogMessage("DEFAULT_CONSTRUCTOR");
+            if(getStepByStepMode() && getLogMode()) loopLatency();
         }
 
         HashTable(std::initializer_list<key_type> ilist) : HashTable() {
@@ -147,27 +149,19 @@ namespace lrstruct {
         /**
          * Recursion call as foreach work
          */
-        template<typename InputIt> HashTable(InputIt first, InputIt last) : table(new Node[N]){
+        template<typename InputIt> HashTable(InputIt first, InputIt last) : table(new Node[hashKeySize]) {
             insert(first, last);
             if(DEBUG) qDebug() << "RANGE_CONSTRUCTOR" << endl;
-            if(FILE_LOG) {
-                std::fstream fs;
-                fs.open (LOG_FILE_WAY, std::fstream::in | std::fstream::out | std::fstream::app);
-                fs << "RANGE_CONSTRUCTOR\n";
-                fs.close();
-            }
+            if(getLogMode()) makeLogMessage("RANGE_CONSTRUCTOR");
+            if(getStepByStepMode() && getLogMode()) loopLatency();
         }
 
-        HashTable(const HashTable &other) : table(new Node[N]) {
+        HashTable(const HashTable &other) : table(new Node[hashKeySize]) {
             for (const auto &key : other)
                 insert_unchecked(key);
             if(DEBUG) qDebug() << "COPY_CONSTRUCTOR" << endl;
-            if(FILE_LOG) {
-                std::fstream fs;
-                fs.open (LOG_FILE_WAY, std::fstream::in | std::fstream::out | std::fstream::app);
-                fs << "COPY_CONSTRUCTOR\n";
-                fs.close();
-            }
+            if(getLogMode()) makeLogMessage("COPY_CONSTRUCTOR");
+            if(getStepByStepMode() && getLogMode()) loopLatency();
         }
 
         ~HashTable() {
@@ -176,8 +170,9 @@ namespace lrstruct {
 
         /* ----- METHODS ----- */
 
-        size_type size() const {
+        size_type size() {
             return cSize;
+            if(getStepByStepMode() || getLogMode()) loopLatency();
         }
 
         bool empty() const {
@@ -204,16 +199,26 @@ namespace lrstruct {
             return end();
         }
 
-        bool findOrInsert(const key_type& key) const {
+        #include "structLoggerHashTable.tpp"
+
+        bool findOrInsert(const key_type& key) {
             const auto row = hash_idx(key);
-            for (Node* n = table[row].head; n != nullptr; n = n->next)
+            for (Node* n = table[row].head; n != nullptr; n = n->next) {
+                makeLogMessage("Now is: ", n->data);
                 if (key_equal{}(n->data, key)) {
+                    if(getLogMode()) makeLogMessage("It's searching element!");
                     return true;
                 }
+                makeLogMessage("It's  NOT searching element!");
+                if(getStepByStepMode()) {
+                    loopLatency();
+                    emit printOutput();
+                }
+            }
             return false;
         }
 
-        void swap(HashTable& other){
+        void swap(HashTable& other) {
             std::swap(maxSize, other.maxSize);
             std::swap(table, other.table);
             std::swap(cSize, other.cSize);
@@ -226,6 +231,12 @@ namespace lrstruct {
         }
 
         std::pair<iterator,bool> insert(const_reference key) {
+            if(getLogMode())
+                makeLogMessage("Inserting element by key");
+            if(getStepByStepMode() && getLogMode()) {
+                loopLatency();
+                emit printOutput();
+            }
             if (!count(key)) {
                 insert_unchecked(key);
                 return std::make_pair(find(key), true);
@@ -239,13 +250,16 @@ namespace lrstruct {
         }
 
         void clear() {
+            if(getLogMode()) makeLogMessage("Cleaning!");
             delete[] table;
             cSize = 0;
-            maxSize = N;
+            maxSize = hashKeySize;
             table = new Node[maxSize];
+            if(getStepByStepMode()) loopLatency();
         }
 
         size_type erase (const key_type& key) {
+            if(getLogMode()) makeLogMessage("Erasing!");
             if (count(key)) {
                 auto idx = hash_idx(key);
 
@@ -294,7 +308,7 @@ namespace lrstruct {
             return const_iterator(nullptr);
         }
 
-        void dump(std::ostream& o = std::cerr) const {
+        void dump(std::ostream& o = std::cerr) {
             for (size_type i{0}; i < maxSize; ++i) {
                 if (table[i].head == nullptr) {
                     o << "[" << i << "]" << ": nullptr" << '\n';
@@ -305,8 +319,45 @@ namespace lrstruct {
                     o << a->data;
                     if (a->next != nullptr)
                     o << " -> ";
+                    if(getStepByStepMode()) {
+                        loopLatency();
+                        emit printOutput();
+                    }
                 }
                 o << '\n';
+                if(getStepByStepMode()) {
+                    loopLatency();
+                    emit printOutput();
+                }
+            }
+        }
+
+        void dump(std::string fileWay) {
+            std::fstream fs;
+            for (size_type i{0}; i < maxSize; ++i) {
+                fs.open (fileWay, std::fstream::in | std::fstream::out | std::fstream::app);
+                if (table[i].head == nullptr) {
+                    fs << "[" << i << "]" << ": nullptr" << '\n';
+                    continue;
+                }
+                fs << "[" << i << "]" << ": ";
+                for (Node* a = table[i].head; a != nullptr; a = a->next) {
+                    fs << a->data;
+                    if (a->next != nullptr)
+                    fs << " -> ";
+                    if(getStepByStepMode()) {
+                        loopLatency();
+                        emit printOutput();
+                    }
+                    fs.close();
+                    fs.open (fileWay, std::fstream::in | std::fstream::out | std::fstream::app);
+                }
+                fs << '\n';
+                if(getStepByStepMode()) {
+                    loopLatency();
+                    emit printOutput();
+                }
+                fs.close();
             }
         }
 
@@ -339,7 +390,6 @@ namespace lrstruct {
             return true;
         }
 
-
         friend bool operator != (const HashTable& lhs, const HashTable& rhs) {
             return !(lhs == rhs);
         }
@@ -347,10 +397,10 @@ namespace lrstruct {
 
     /* -------- HASH TABLE ITERATORS --------*/
 
-    template <typename Key, size_t N>
-    class HashTable<Key,N>::Iterator {
+    template <typename Key>
+    class HashTable<Key>::Iterator {
         private:
-        const HashTable<Key, N> *ptr;
+        const HashTable<Key> *ptr;
             Node *to;
             size_type itPos;
             size_type tblSz;
@@ -372,7 +422,7 @@ namespace lrstruct {
             return to->data;
         }
 
-        Iterator& operator++() {
+        Iterator& operator ++() {
             while (itPos < tblSz) {
                 if (to->next) {
                     to = to->next; return *this;
@@ -408,7 +458,7 @@ namespace lrstruct {
         }
     };
 
-    template <typename Key, size_t N> void swap(HashTable<Key,N>& lhs, HashTable<Key,N>& rhs) {
+    template <typename Key, size_t N> void swap(HashTable<Key>& lhs, HashTable<Key>& rhs) {
         lhs.swap(rhs);
     }
 }
