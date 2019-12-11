@@ -1,7 +1,7 @@
 #ifndef CONSOLE_H
 #define CONSOLE_H
 
-#include <bintree.h>
+#include "bintree.h"
 #include <QGraphicsScene>
 #include <QGraphicsView>
 #include <cmath>

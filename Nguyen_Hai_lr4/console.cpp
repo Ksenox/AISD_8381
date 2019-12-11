@@ -5,29 +5,24 @@ console::console()
 
 }
 int console::checkErr(QString data){
-    int flagErr = 0;
-    string input = data.toStdString(); // Qstring to string
-    char *arr = new char[input.length()+1];// khoi tao char* arr
-    std::strcpy(arr,input.c_str()); // string to char*
-    int len = static_cast<int>(input.length());
-    flagErr = CheckErr(arr,len); // check lai ham nay
-        return flagErr;
+    int flagErr;
+    string input = data.toStdString();
+    flagErr = CheckErr(input,input.length());
+    return flagErr;
 }
 QGraphicsScene* console::Analize(QString data){
     QGraphicsScene *scene = new QGraphicsScene;
 
-    string input = data.toStdString(); // Qstring to string
-    char *arr = new char[input.length()+1];// khoi tao char* arr
-    std::strcpy(arr,input.c_str()); // string to char*
-    int len = static_cast<int>(input.length());
-    Forest *forest = takeForest(arr,len);
+    string input = data.toStdString();
+    Forest *forest = takeforest(input,input.length());
     BinTree *bintree = createBTFromForest(forest);
     string out;
     out += "ANALIZE";
-    out += "\n\nTree of the forest:\n";
+    out += "\n\nTrees of the forest:\n";
     for(int i = 0; i <forest->count; i++){
         out += "\n\tTree " + std::to_string(i+1)+":\t";
         takeInfoOfNode(forest->tree[i]->root,out);
+
 
     }
     out += "\n\nElements of the forest in horizontal order (in width):\n\t";
@@ -38,6 +33,7 @@ QGraphicsScene* console::Analize(QString data){
         }
     }
     out+= "\n\nNatural representation of the forest by a binary tree :\n\n\t";
+
     takeInfoBT(bintree->root,out);
     scene->addText(QString::fromStdString(out));
     return scene;
@@ -46,13 +42,11 @@ QGraphicsScene* console::Analize(QString data){
 QGraphicsScene* console::Console(QString data){
     QGraphicsScene *scene = new QGraphicsScene;
 
-    string input = data.toStdString(); // Qstring to string
-    char *arr = new char[input.length()+1];// khoi tao char* arr
-    std::strcpy(arr,input.c_str()); // string to char*
-    int len = static_cast<int>(input.length());
+    string input = data.toStdString();
 
 
-    Forest *forest = takeForest(arr,len);
+    Forest *forest = takeforest(input,input.length()
+                                );
     BinTree *bintree = createBTFromForest(forest);
     scene->clear();
     QPen pen;
@@ -66,7 +60,7 @@ QGraphicsScene* console::Console(QString data){
 
     int wDeep = static_cast<int>(pow(2, bintree->deep)+2);
     int hDelta = 50;
-    int wDelta = 7;
+    int wDelta = 4;
     int width = (wDelta*wDeep)/2;
     treePainter(scene, bintree->root, width/2, hDelta, wDelta, hDelta, pen, brush, font, wDeep);
 
@@ -81,13 +75,13 @@ void console::treePainter(QGraphicsScene *&scene, BinNode *binnode, int w, int h
 
     if (binnode == nullptr)
         return ;
-    QString out;
+    string out;
     out += binnode->info;
     QGraphicsTextItem *textItem = new QGraphicsTextItem;
     textItem->setPos(w, h);// set toa do (x;y) cua nut
-    textItem->setPlainText(out);
+    textItem->setPlainText(QString::fromStdString(out));
     textItem->setFont(font);
-    scene->addEllipse(w-wDelta/2, h, wDelta*5/2, wDelta*5/2, pen, brush); // Tạo hình tròn của các nút
+    //scene->addEllipse(w-wDelta/2, h, wDelta*5/2, wDelta*5/2, pen, brush); // Tạo hình tròn của các nút
     if (binnode->left != nullptr)
         scene->addLine(w+wDelta/2, h+wDelta, w-(depth/2)*wDelta+wDelta/2, h+hDelta+wDelta, pen);
     if (binnode->right != nullptr)

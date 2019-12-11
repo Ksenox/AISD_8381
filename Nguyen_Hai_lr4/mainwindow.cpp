@@ -23,23 +23,15 @@ void MainWindow::on_pushButton_clicked()
     flagErr = Console->checkErr(data);
 
     if(flagErr == 1){
-        QMessageBox::warning(this,"Err","Missing character '(' or ')'");
+        QMessageBox::warning(this,"Error","Input incorrect");
     }
     else if(flagErr == 2){
-        QMessageBox::warning(this,"Err","Tree empty.");
+        QMessageBox::warning(this,"Error","                 Input incorrect.\nCannot be a space between the brackets.");
     }
     else if(flagErr == 3){
         QMessageBox::warning(this,"Error","Input is not alpharic");
     }
-    else if(flagErr == 4){
-        QMessageBox::warning(this,"Error","Extra character ')'");
-    }
-    else if (flagErr == 5){
-        QMessageBox::warning(this,"Error","The first tree in forest incorrect.");
-    }
-    else if (flagErr == 6) {
-        QMessageBox::warning(this,"Error","Input incorrect");
-    }
+
     else if (flagErr == 0) {
         if(flagCase_1 == false && flagCase_2 == false)
             QMessageBox::warning(this,"Warning","Please,select any radio button!");

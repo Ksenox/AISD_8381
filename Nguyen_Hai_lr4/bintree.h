@@ -3,8 +3,7 @@
 
 struct BinNode
 {
-    bool isLeaf;
-    char info;
+    string info;
     BinNode *left;
     BinNode *right;
 };
@@ -16,9 +15,9 @@ struct BinTree
 };
 
 BinTree *createBinTree();
-BinNode *createBinNode(char info, bool isAlpha);
-
+BinNode *createBinNode(string info);
 BinTree *createBTFromForest(Forest* forest);
+
 BinNode *ConsBT(BinNode *root, Forest *left, Forest *right);
 Tree *Head(Forest *forest);
 Forest *Tail(Forest *forest);
@@ -29,4 +28,3 @@ int CountDeep(BinNode *&node);
 int CountDeepOfTree(Node* root);
 void takeInfoBT(BinNode *root, string &out);
 void takeInfoByDeep(Node *root,int deep,string &out);
-

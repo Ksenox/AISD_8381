@@ -8,8 +8,7 @@ using namespace std;
 
 
 struct Node{
-        bool isLeaf;
-        char info;
+        string info;
         int total;
         Node **Tnode;
 };
@@ -19,17 +18,20 @@ struct Tree{
 };
 
 struct Forest{
-    int count;
-    Tree **tree;
+        int count;
+        Tree **tree;
 };
 
-Forest *takeForest(char* arr, int len);
-Node *AppendNode(Node *node,char* arr,int& i,int len, bool isAlpha,int total);
-int CountTree(char* arr, int len);
-int CheckErr(char *arr, int len);
-int BranchOfNode(char *arr, int i, int len);
+
+Forest *takeforest(string str, int len);
 Forest *createForest(int count);
 Tree *createTree();
-Node *createNode(char info,bool isAlpha, int total);
-int DeepOfTree(char *arr, int i , int len);
+Node *AppendNode(Node *root,string str, int &index,int len,int total);
+Node *createNode(string info, int total);
+string takeString(string str,int &index,int len);
+int BranchOfNode(string str, int index, int len);
+int DeepOfTree(string str, int index, int len);
+int CountTree(string str, int len);
+int CheckErr(string str, int len);
+void takeInfoByDeep(Node *root,int deep);
 void takeInfoOfNode(Node *root, string &out);
