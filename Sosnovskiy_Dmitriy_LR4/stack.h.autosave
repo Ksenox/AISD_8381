@@ -1,0 +1,26 @@
+#ifndef STACK_H
+#define STACK_H
+
+template<typename StackElementType>
+class Stack
+{
+private:
+    class StackElement
+    {
+        public:
+            StackElement(StackElementType value);
+            ~StackElement();
+            StackElement* nextElement = nullptr;
+            StackElementType value;
+    };
+
+    StackElement* head = nullptr;
+public:
+    Stack();
+    ~Stack();
+    void add(StackElementType newElementValue);
+    StackElementType get();
+
+};
+
+#endif // STACK_H
