@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>PREFIX</title>
+    <link rel="stylesheet" href="../src/lr3screen.css">
+
+</head>
+
+<body>
+    <div class="form">
+        <label class="FormLabel" for="prefix">Префиксное выражение</label>
+        <textarea id="prefix" name="prefix" cols="30" rows="2">+++2222</textarea>
+        <label class="FormLabel" for="stepbystepflag">Пошаговое решение</label>
+        <input type="checkbox" name="step_by_step" id="stepbystepflag"></input>
+        <button id='button_go' style="width: 100%" onclick="test()">GO!</button>
+        <hr width="100%">
+        <button id='button_step' style="width: 100%" onclick="get_str()">Step up</button>
+    </div>
+    <p>Результат:</p>
+    <table border=1>
+        <thead>
+            <tr>
+                <td>#</td>
+                <td width=300px>Входное выражение</td>
+                <td width=300px>Выход</td>
+            </tr>
+        </thead>
+        <tbody id="step_value">
+            <tr>
+                <td>1</td>
+                <td>2</td>
+                <td>3</td>
+            </tr>
+        </tbody>
+    </table>
+    <br>
+    <form action="/lr_3_pref" method="get">
+        <label for="team_name">Want to start over?</label>
+        <input type="submit" value="Anew">
+    </form>
+    <script src="../src/lr_3_script.js"></script>
+</body>
+
+</html>
