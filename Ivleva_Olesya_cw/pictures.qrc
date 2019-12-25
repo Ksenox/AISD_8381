@@ -1,0 +1,11 @@
+<RCC>
+    <qresource prefix="/">
+        <file>C:/Users/Олеся/Downloads/icons.png</file>
+        <file>C:/Users/Олеся/Downloads/icons8-ok-100_1.png</file>
+        <file>C:/Users/Олеся/Downloads/icons8-advance-64.png</file>
+        <file>C:/Users/Олеся/Downloads/icons8-skip-to-start-64.png</file>
+        <file>C:/Users/Олеся/Downloads/icons8-down-arrow-64.png</file>
+        <file>C:/Users/Олеся/Downloads/icons8-delete-64.png</file>
+        <file>C:/Users/Олеся/Downloads/icons8-delete-bin-64.png</file>
+    </qresource>
+</RCC>
