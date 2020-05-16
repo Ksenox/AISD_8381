@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>TABLE</title>
+    <link rel="stylesheet" href="../src/cw_table_screen.css">
+    <link rel="stylesheet" href="../src/bts.css">
+
+</head>
+
+<body>
+    <div class="card-header">
+        <ul class="nav nav-tabs card-header-tabs">
+            <li class="nav-item">
+                <a class="nav-link" href="/">Main page</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/cw_tree">Tree</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="">Table</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/cw_graph">Graphs</a>
+            </li>
+        </ul>
+    </div>
+    <div class=left>
+        <h1>Table "All Tests"</h1>
+        <div class=box_table>
+
+
+            <div class="form-row">
+                <div class="col-auto">
+                    <div class="input-group mb-2">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">From</div>
+                        </div>
+                        <input type="number" class="form-control" id="from_num" placeholder="Integer value">
+                    </div>
+                </div>
+                <div class="col-auto">
+                    <div class="input-group mb-2">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">To</div>
+                        </div>
+                        <input type="number" class="form-control" id="to_num" placeholder="Integer value">
+                    </div>
+                </div>
+
+            </div>
+
+            <button id=take_data class="btn btn1" onclick="take_table()">UPDATE DATA</button>
+            <div>
+                <table class="tb_1 table table-hover ">
+                    <thead>
+                        <tr>
+                            <td>#</td>
+                            <td width=60%>Input string</td>
+                            <td width=20%>Рrocessing time</td>
+                            <td width=20%>Number of turns</td>
+                        </tr>
+                    </thead>
+                    <tbody id=table_body>
+                        <tr id="row_1">
+                            <td>1</td>
+                            <td>s t r n</td>
+                            <td>t i m e</td>
+                            <td>t u r n</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class=right>
+        <h1>Data generation</h1>
+        <div class="form-col">
+            <div class="row-auto">
+                <div class="input-group mb-2">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">Leafs</div>
+                    </div>
+                    <input type="number" class="form-control" id="q_leafs" placeholder="Quantity of leafs">
+                </div>
+            </div>
+            <div class="row-auto">
+                <div class="input-group mb-2">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">Tests</div>
+                    </div>
+                    <input type="number" class="form-control" id="q_tests" placeholder="Quantity of tests">
+                </div>
+            </div>
+            <div class="row-auto">
+                <div class="input-group mb-2">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">Distribution</div>
+                    </div>
+                    <select class="custom-select" id=distrib>
+                        <option value="null">Select the distribution property</option>
+                        <option value="average">Average distribution</option>
+                        <option value="worst">Worse distribution</option>
+                    </select>
+                </div>
+            </div>
+            <button id=generate class="btn btn2" onclick=gen_data()>Generate</button>
+        </div>
+
+
+</body>
+
+<script src="../src/cw_table_script.js"></script>
+
+</html>
